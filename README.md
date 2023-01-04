@@ -1,7 +1,7 @@
-MCREEP :: automated fitting of various models to creep data
------------------------------------------------------------
+MCREEP :: fitting of models to creep data
+-----------------------------------------
 
-Fitting of various pre-defined models to creep data.
+MCREEP fits various pre-defined models to creep data.
 
 * The creep data:
     - A text file with two columns.
@@ -17,13 +17,13 @@ Fitting of various pre-defined models to creep data.
 Quick start
 -----------
 1. Install MCREEP: `pip install mcreep`
-2. Download the [demo package](https://mirekslouf.github.io/mcreep),
+2. Download the [demo package](https://mirekslouf.github.io/mcreep/docs),
    unzip it, and follow the instructions in *readme* file.
 3. Basically, you just run the unzipped PY-script and see the results.
 	- The PY-script should run anywhere, but the recommended environment is
       [Spyder](https://www.spyder-ide.org).
 	- The output (in Spyder) should look like in this 
-      [PrintScreen](https://mirekslouf.github.io/mcreep/images/mcreep_prtscr.png).
+      [PrintScreen](https://mirekslouf.github.io/mcreep/docs/images/mcreep_printscreen.png)
 
 Documentation and examples
 --------------------------
