@@ -23,7 +23,7 @@ Quick start
 	- The PY-script should run anywhere, but the recommended environment is
       [Spyder](https://www.spyder-ide.org).
 	- The output (in Spyder) should look like in this 
-      [PrintScreen](https://mirekslouf.github.io/mcreep/docs/images/mcreep_printscreen.png)
+      [PrintScreen](https://mirekslouf.github.io/mcreep/docs/images/mcreep_printscreen.png).
 
 Documentation and examples
 --------------------------
