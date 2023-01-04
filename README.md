@@ -28,7 +28,7 @@ Quick start
 Documentation and examples
 --------------------------
 * Home page of the project
-  at [GitHub](https://github.com/mireklsouf/mcreep/) 
+  at [GitHub](https://github.com/mirekslouf/mcreep/) 
   and [GitHub pages](https://mirekslouf.github.io/mcreep/).
 * [Docs and examples](https://mirekslouf.github.io/mcreep/docs/)
   summarized at GitHub pages.
