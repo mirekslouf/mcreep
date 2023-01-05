@@ -469,7 +469,7 @@
 </span><span id="L-336"><a href="#L-336"><span class="linenos">336</span></a><span class="sd">                For indentation experiments, t_start ~ when Fmax is reached.</span>
 </span><span id="L-337"><a href="#L-337"><span class="linenos">337</span></a><span class="sd">                For tensile experiments, t_start ~ the first detected time.</span>
 </span><span id="L-338"><a href="#L-338"><span class="linenos">338</span></a><span class="sd">                Alternatively, t_start can be a bit higher</span>
-</span><span id="L-339"><a href="#L-339"><span class="linenos">339</span></a><span class="sd">                in order to avoid initial period.</span>
+</span><span id="L-339"><a href="#L-339"><span class="linenos">339</span></a><span class="sd">                in order to ignore the initial period.</span>
 </span><span id="L-340"><a href="#L-340"><span class="linenos">340</span></a><span class="sd">        </span>
 </span><span id="L-341"><a href="#L-341"><span class="linenos">341</span></a><span class="sd">        t_hold : float</span>
 </span><span id="L-342"><a href="#L-342"><span class="linenos">342</span></a><span class="sd">            The creep data are read for the interval</span>
@@ -1149,7 +1149,7 @@
 </span><span id="Model-337"><a href="#Model-337"><span class="linenos">337</span></a><span class="sd">                For indentation experiments, t_start ~ when Fmax is reached.</span>
 </span><span id="Model-338"><a href="#Model-338"><span class="linenos">338</span></a><span class="sd">                For tensile experiments, t_start ~ the first detected time.</span>
 </span><span id="Model-339"><a href="#Model-339"><span class="linenos">339</span></a><span class="sd">                Alternatively, t_start can be a bit higher</span>
-</span><span id="Model-340"><a href="#Model-340"><span class="linenos">340</span></a><span class="sd">                in order to avoid initial period.</span>
+</span><span id="Model-340"><a href="#Model-340"><span class="linenos">340</span></a><span class="sd">                in order to ignore the initial period.</span>
 </span><span id="Model-341"><a href="#Model-341"><span class="linenos">341</span></a><span class="sd">        </span>
 </span><span id="Model-342"><a href="#Model-342"><span class="linenos">342</span></a><span class="sd">        t_hold : float</span>
 </span><span id="Model-343"><a href="#Model-343"><span class="linenos">343</span></a><span class="sd">            The creep data are read for the interval</span>
@@ -1735,7 +1735,7 @@ and to text file.</li>
 </span><span id="Model.run-337"><a href="#Model.run-337"><span class="linenos">337</span></a><span class="sd">                For indentation experiments, t_start ~ when Fmax is reached.</span>
 </span><span id="Model.run-338"><a href="#Model.run-338"><span class="linenos">338</span></a><span class="sd">                For tensile experiments, t_start ~ the first detected time.</span>
 </span><span id="Model.run-339"><a href="#Model.run-339"><span class="linenos">339</span></a><span class="sd">                Alternatively, t_start can be a bit higher</span>
-</span><span id="Model.run-340"><a href="#Model.run-340"><span class="linenos">340</span></a><span class="sd">                in order to avoid initial period.</span>
+</span><span id="Model.run-340"><a href="#Model.run-340"><span class="linenos">340</span></a><span class="sd">                in order to ignore the initial period.</span>
 </span><span id="Model.run-341"><a href="#Model.run-341"><span class="linenos">341</span></a><span class="sd">        </span>
 </span><span id="Model.run-342"><a href="#Model.run-342"><span class="linenos">342</span></a><span class="sd">        t_hold : float</span>
 </span><span id="Model.run-343"><a href="#Model.run-343"><span class="linenos">343</span></a><span class="sd">            The creep data are read for the interval</span>
@@ -1813,7 +1813,7 @@ t_start is the initial time for the data reading.
     For indentation experiments, t_start ~ when Fmax is reached.
     For tensile experiments, t_start ~ the first detected time.
     Alternatively, t_start can be a bit higher
-    in order to avoid initial period.</li>
+    in order to ignore the initial period.</li>
 <li><strong>t_hold</strong> (float):
 The creep data are read for the interval
 [t_start; t_start+t_hold];
