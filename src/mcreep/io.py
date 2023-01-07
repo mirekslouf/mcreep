@@ -75,14 +75,20 @@ def read_datafile(MODEL, datafile, t_start, t_hold):
     # (1st column = t[s], 2nd col = def[um], range = [t_start;t_start+t_hold]
     return(data)
 
-def print_fitting_result(MODEL, datafile, par):
+def print_fitting_result(MODEL, datafile, par, cov):
     '''
     Print ONE result of fitting
     (i.e. print fitting results for one/currently processed datafile).
 
-    We note that the complete results of fitting (for all datafiles)
+    We note that the complete results of each fitting (for each datafile)
     are kept in mcreep.model.Model object and usually reported/printed
     together at the very end of the whole processing.
+    
+    Exception: Covariance matrixes of each fitting are just printed here,
+    NOT kept in mcreep.model.Model object and NOT saved to file.
+    Moreover, they are printed just on request (MODEL.print_covariances=True).
+    They are needed just occasionally, and if really needed, the values
+    can be copy+pasted from stdout and saved to file.
 
     Parameters
     ----------
@@ -97,6 +103,10 @@ def print_fitting_result(MODEL, datafile, par):
     par : list of floats
         List of optimized parameters of given fitting function;
         output from the procedure mcreep.fit.fit.
+        
+    cov : 2D-array of floats
+        Covariance matrix for all fitted/regression parameters;
+        supplementary output from the procedure mcreep.fit.fit.
 
     Returns
     -------
@@ -106,8 +116,9 @@ def print_fitting_result(MODEL, datafile, par):
     # (1) Convert parameters array to tuple => suitable for formatted printing 
     par = tuple(par)
     # (2) Print datafile name (this is the same for all models)
-    print(f'{datafile:12s}', end='')
-    # (3) Print parameters of individual models...
+    print(f'{datafile} ', end='')
+    # (3) Print fitting/regression parameters...
+    # * The parameters are printed in the format/order specific to given model.
     if MODEL.fname == 'power_law':
         print('[C,n]: %8.4f %8.4f' % par)
     elif MODEL.fname == 'nutting_law':
@@ -134,6 +145,20 @@ def print_fitting_result(MODEL, datafile, par):
     else:
         print('Warning: unknown model during printing!')
         print(par)
+    # (4) Print covariance matrix showing independence of parameters...
+    # * The cov.matrix is printed on request (MODEL.print_covariances=True).
+    # * The order of rows/columns of the cov.matrix the same like in item (3).
+    #   => therefore, we do not re-print the parameter names like in item (3).
+    # * Fitting/regression parameters are usually saved to file
+    #   (by means of MODEL.final_report() method).
+    # * Covariance matrixes is just printed to stdout here.
+    #   (they can be copy+pasted from stdout and saved to file manually).
+    if MODEL.print_covariances == True:
+        print('\nCovariance matrix of all parameters after fitting:')
+        for row in cov:
+            for val in row:
+                print(f'{val:10.6f}', end='')
+            print()
 
 def plot_fitting_result(MODEL, datafile, data, par):
     '''

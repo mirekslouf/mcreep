@@ -10,9 +10,9 @@ Pre-defined functions available in current version:
 
 * power_law = empirical Power Law model:   `deformation(t) = C * t**n`
 * Nutting's law = empirical Nutting's law: `deformation(t) = e0 * C * t**n`
-* evp_s_d_1kv = EVP model with Spring + Dashpot + 1 Kelvin/Voight element
-* evp_s_d_2kv = EVP model with Spring + Dashpot + 2 Kelvin/Voight elements
-* evp_s_d_3kv = EVP model with Spring + Dashpot + 3 Kelvin/Voight elements
+* evp_s_d_1kv = EVP model with Spring + Dashpot + 1 Kelvin/Voigt element
+* evp_s_d_2kv = EVP model with Spring + Dashpot + 2 Kelvin/Voigt elements
+* evp_s_d_3kv = EVP model with Spring + Dashpot + 3 Kelvin/Voigt elements
 
 The modifications for tensile and indentation creep data:
     

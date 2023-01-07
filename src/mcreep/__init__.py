@@ -6,13 +6,13 @@ MCREEP package
 Fitting of various pre-defined models to creep data.
 
 * The creep data:
-    - a text file with two columns.
-    - the 1st column = time, the 2nd column = deformation.
+    - a text file with two columns
+    - the 1st column = time, the 2nd column = deformation
 * The creep data may come from various experiments:
-    - tensile creep (standard creep experiment)
-    - indentation creep with Vickers/Berkovich/spherical tips
+    - tensile creep => deformation(t) = strain(t) = epsilon(t)
+    - indentation creep => deformation(t) = penetration_depth(t) = h(t)
 * The pre-defined models within the pagkage are:
-    - simple empirical models (Power law, Nutting's law)
+    - simple empirical models = Power law, Nutting's law
     - phenomenological models = elasto-visco-plastic models = EVP models
 * Technical notes:
     - tensile creep is usually measured in macroscale

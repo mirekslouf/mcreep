@@ -61,19 +61,28 @@ class Model:
         The number of values must correspond to variables in given model.
         If defined, iguess parameter is passed to scipy.optimize.curve_fit
     
+    print_covariances : bool; default is False
+        If true, print covariance matrix.
+        The diagonal elements of covariance matrix are `sigma**2(par1,par1)`
+        => if they are close to zero, sigma of par1 is very low.
+        The off-diagonal elements of covariance matrix = `sigma**2(par1,par2)`
+        => if they are zero, par1 and par2 are independent on each other.
+        Additional theory concerning the covariation matrix
+        can be found elsewhere: https://stats.stackexchange.com/q/151018
+        
     output_dir : str or path-like object; optional, default is '.'
         Directory for output files.
         If not given, we use current directory,
         i.e. the directory of the script that runs the program.
-        
+
     Returns
     -------
-    Model object : 
+    Model object :  
         * The Model.__init__ function
           returns the object with all properties and methods
         * The Model.run function
           fits the selected model function to experimental creep data
-          and saves the results to Model.table_of_results property.
+          and saves the results to {Model.table_of_results} property.
     
     Additional parameters
     ---------------------
@@ -89,7 +98,8 @@ class Model:
     '''
     
     def __init__(self, EPAR, DPAR, PPAR, name, func, 
-                 rtimes=None, iguess=None, output_dir='.'):
+                 rtimes=None, iguess=None, print_covariances=False,
+                 output_dir='.'):
         # Docstring for __init__ are given above in class description.
         # Reason: In this way, the parameters are visible in Spyder/Ctrl+I.
 
@@ -102,6 +112,7 @@ class Model:
         self.func = func
         self.rtimes = rtimes
         self.iguess = iguess
+        self.print_covariances = print_covariances
         self.output_dir = Path(output_dir)
         # (2) Modify/initialize additional properties
         # `(a) fname = name of the function; needed in future modifications
@@ -336,7 +347,7 @@ class Model:
                 For indentation experiments, t_start ~ when Fmax is reached.
                 For tensile experiments, t_start ~ the first detected time.
                 Alternatively, t_start can be a bit higher
-                in order to avoid initial period.
+                in order to ignore the initial period.
         
         t_hold : float
             The creep data are read for the interval
@@ -385,7 +396,7 @@ class Model:
         # (Reason: datafile might have been gi ven as pathlib object...
         # (...and the pathlib object cannot be printed easily as string
         datafile = Path(datafile).name
-        self.print_fitting_result(datafile, par)
+        self.print_fitting_result(datafile, par, cov)
         # (3) Plot the result of fitting.
         self.plot_fitting_result(datafile, data, par)
         # (4) Calculate statistics
@@ -409,12 +420,12 @@ class Model:
         par,cov = mcreep.fit.fit(self, data, t_fstart, t_fend)
         return(par, cov)
     
-    def print_fitting_result(self, datafile, par):
+    def print_fitting_result(self, datafile, par, cov):
         '''
         Print the results of creep data fitting with given model.
         (just a wrapper for function mcreep.io.print_fitting_result).
         '''
-        mcreep.io.print_fitting_result(self, datafile, par)
+        mcreep.io.print_fitting_result(self, datafile, par, cov)
     
     def plot_fitting_result(self, datafile, data, par):
         '''
