@@ -1,5 +1,5 @@
-MCREEP :: fitting of models to creep data
------------------------------------------
+MCREEP
+------
 
 MCREEP package fits various pre-defined models to creep data.
 
