@@ -40,4 +40,4 @@ Typical (simple/minimalistic but complete/working) example is as follows:
 >>> MODEL.final_report()
 '''
 
-__version__ = "1.1.2"
+__version__ = "1.1.3"

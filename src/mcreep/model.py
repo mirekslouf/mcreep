@@ -71,16 +71,19 @@ class Model:
         can be found elsewhere: https://stats.stackexchange.com/q/151018
         
     output_dir : str or path-like object; optional, default is '.'
-        Directory for output files.
+        Directory for output graphs = PNG-files.
         If not given, we use current directory,
         i.e. the directory of the script that runs the program.
+        We note that final report = TXT-file
+        is always written in current directory by default,
+        unless we call Model.final_report method with output_file argument.
 
     Returns
     -------
     Model object :  
         * The Model.__init__ function
           returns the object with all properties and methods
-        * The Model.run function
+        * The Model.run method
           fits the selected model function to experimental creep data
           and saves the results to {Model.table_of_results} property.
     
@@ -401,8 +404,13 @@ class Model:
         self.plot_fitting_result(datafile, data, par)
         # (4) Calculate statistics
         R2fit, R2all = self.calculate_statistics(par, data, t_fstart, t_fend)
-        # (5) Save the result of fitting to MODEL object for final processing.
-        self.save_fitting_result(datafile, par, R2fit, R2all, t_start)
+        # (5) Recalculate and save the result of fitting to MODEL object
+        # (the results are saved in both original and recalculated form
+        # (original results = fitting/regression parameters
+        # (recalculated results - for EVP models: B,D => C = compliances
+        # (EVP recalculations consider also difference tensile vs. indentation
+        self.recalc_and_save_fitting_results( 
+            datafile, par, R2fit, R2all, t_start)
 
     def read_datafile(self, datafile, t_start, t_hold):
         '''
@@ -468,14 +476,18 @@ class Model:
         R2all = mcreep.fit.coefficient_of_determination(self, par, data)
         return(R2fit, R2all)
     
-    def save_fitting_result(self, datafile, par, R2fit, R2all, t_start):
+    def recalc_and_save_fitting_results(
+            self, datafile, par, R2fit, R2all, t_start):
         '''
-        Save the results of fitting to Model object.
+        Recalculate and save the results of fitting to Model object.
         The fitting results are saved in two object properties:
         
         * self.table_of_results = the results of fitting
         * self.table_of_results_evp = recalculated results for EVP models
-
+        
+        The recalculations convert fitting/regression parameters to
+        final compliances of EVP models.
+        
         The saved results in Model object can be printed and saved using
         another property mcreep.model.Model.final_report.
         
@@ -556,7 +568,7 @@ class Model:
                 else:
                     # calculation for indentation experiments => uses RCF=rho
                     C1 = results1['D1']/rho(tau1)
-                    C0 = results1['B0'] - results1['Cv']*tR/2 - C1
+                    C0 = results1['B0'] + results1['Cv']*tR/2 - C1
                     results2 = {'C0':C0, 'Cv':Cv, 'C1':C1}
                 # Add retardation times to both results1 and results2
                 results1 = {**results1, 'tau1':tau1}
@@ -576,7 +588,7 @@ class Model:
                 else:
                     # calculation for indentation experiments => uses RCF=rho
                     C1,C2 = D1/rho(tau1),D2/rho(tau2)
-                    C0 = results1['B0'] - results1['Cv']*tR/2 - C1 - C2
+                    C0 = results1['B0'] + results1['Cv']*tR/2 - C1 - C2
                     results2 = {'C0':C0, 'Cv':Cv, 'C1':C1, 'C2':C2}
                 # Add retardation times to both results1 and results2
                 results1 = {**results1, 'tau1':tau1, 'tau2':tau2}
@@ -596,7 +608,7 @@ class Model:
                 else:
                     # calculation for indentation experiments => uses RCF=rho
                     C1,C2,C3 = D1/rho(tau1),D2/rho(tau2),D3/rho(tau3)
-                    C0 = results1['B0'] - results1['Cv']*tR/2 - C1 - C2 - C3 
+                    C0 = results1['B0'] + results1['Cv']*tR/2 - C1 - C2 - C3 
                     results2 = {'C0':C0, 'Cv':Cv, 'C1':C1, 'C2':C2, 'C3':C3}
                 # Add retardation times to both results1 and results2
                 results1 = {**results1, 'tau1':tau1, 'tau2':tau2, 'tau3':tau3}
