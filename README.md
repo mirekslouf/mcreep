@@ -14,7 +14,8 @@ in such a way that the results from the two methods are comparable.
     - Simple empirical models = Power law, Nutting's law.
     - Phenomenological models = elasto-visco-plastic models = EVP models.
 * The theory and models are described in the open-acces publication:
-	- *Materials*, submitted (minor revisions requested).
+	- Materials 16 (2023) 834.
+	  [https://doi.org/10.3390/ma16020834](https://doi.org/10.3390/ma16020834)
 	- If you use MCREEP in your research, **please cite** the publication above.
 
 Quick start
@@ -29,7 +30,7 @@ Quick start
       [PrintScreen](https://mirekslouf.github.io/mcreep/docs/images/mcreep_printscreen.png).
 
 Installation, documentation and examples
---------------------------
+----------------------------------------
 * MCREEP is available at
   [PyPI](https://pypi.org/project/mcreep/)
   &rArr; installation: `pip install mcreep`
