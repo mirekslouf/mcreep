@@ -224,10 +224,14 @@ def plot_fitting_result(MODEL, datafile, data, par):
             MODEL.PPAR.xlabel = 'log('+MODEL.PPAR.xlabel+')'
         if not(MODEL.PPAR.ylabel.startswith('log')):
             MODEL.PPAR.ylabel = 'log('+MODEL.PPAR.ylabel+')'
-    # (6) Create plot
+    # (6) Define suitable default for legend coordinates
+    # (in a typical case when the legend coordinates were NOT given as argument
+    if MODEL.PPAR.legend_coordinates == None:
+        my_legend_coordinates = (0.52,0.28)
+    # (7) Create plot
     # (user-adjustable + global plot settings are saved in PPAR object
     # (MODEL.PPAR object is an instance of mcreep.const.PlotParameters class
-    # (6a) No axes_object was given as argument => create+save single plot
+    # (7a) No axes_object was given as argument => create+save single plot
     if MODEL.PPAR.ax == None:
         # (a) Create name of output graph => name of the plot to save.
         # (output graph = MODEL.output_dir/datafile.png
@@ -239,7 +243,7 @@ def plot_fitting_result(MODEL, datafile, data, par):
         plt.xlabel(MODEL.PPAR.xlabel)
         plt.ylabel(MODEL.PPAR.ylabel)
         plt.grid()
-        plt.legend()
+        plt.legend(loc='upper left', bbox_to_anchor=my_legend_coordinates)
         plt.tight_layout()
         # (c) Save the plot
         plt.savefig(output_graph)
@@ -254,7 +258,7 @@ def plot_fitting_result(MODEL, datafile, data, par):
         if MODEL.PPAR.showfigs == True:
             plt.show()
         plt.close()
-    # (6b) axes object was given as argument => create plot within the axes
+    # (7b) axes object was given as argument => create plot within the axes
     # (this is employed when creating multiple plots or multiplots
     else:
         ax = MODEL.PPAR.ax
@@ -263,7 +267,7 @@ def plot_fitting_result(MODEL, datafile, data, par):
         ax.set_xlabel(MODEL.PPAR.xlabel)
         ax.set_ylabel(MODEL.PPAR.ylabel)
         ax.grid()
-        ax.legend()
+        ax.legend(loc='upper left', bbox_to_anchor=my_legend_coordinates)
         
 def recalculate_fitted_data(EPAR, Y_orig):
     '''

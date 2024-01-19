@@ -283,76 +283,84 @@
 </span><span id="L-186"><a href="#L-186"><span class="linenos">186</span></a><span class="sd">        * If ax is defined, create the plot within given ax object,</span>
 </span><span id="L-187"><a href="#L-187"><span class="linenos">187</span></a><span class="sd">          which can combined with `fig,ax = plt.subplots()`</span>
 </span><span id="L-188"><a href="#L-188"><span class="linenos">188</span></a><span class="sd">          in order to create multile figures.</span>
-</span><span id="L-189"><a href="#L-189"><span class="linenos">189</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="L-190"><a href="#L-190"><span class="linenos">190</span></a>    
-</span><span id="L-191"><a href="#L-191"><span class="linenos">191</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span>
-</span><span id="L-192"><a href="#L-192"><span class="linenos">192</span></a>                 <span class="n">logscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">e_to_percent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="L-193"><a href="#L-193"><span class="linenos">193</span></a>                 <span class="n">rcParams</span><span class="o">=</span><span class="p">{},</span> <span class="n">showfigs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="L-194"><a href="#L-194"><span class="linenos">194</span></a>        <span class="c1"># Docstring for __init__ is given above in the class definition.</span>
-</span><span id="L-195"><a href="#L-195"><span class="linenos">195</span></a>        <span class="c1"># Reason: consistent help in Spyder and Pdoc.</span>
-</span><span id="L-196"><a href="#L-196"><span class="linenos">196</span></a>        <span class="c1"># -----        </span>
-</span><span id="L-197"><a href="#L-197"><span class="linenos">197</span></a>        
-</span><span id="L-198"><a href="#L-198"><span class="linenos">198</span></a>        <span class="c1"># (1) Initialize basic parameters</span>
-</span><span id="L-199"><a href="#L-199"><span class="linenos">199</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span>
-</span><span id="L-200"><a href="#L-200"><span class="linenos">200</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span>
-</span><span id="L-201"><a href="#L-201"><span class="linenos">201</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">logscale</span> <span class="o">=</span> <span class="n">logscale</span>
-</span><span id="L-202"><a href="#L-202"><span class="linenos">202</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">e_to_percent</span> <span class="o">=</span> <span class="n">e_to_percent</span>
-</span><span id="L-203"><a href="#L-203"><span class="linenos">203</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">rcParams</span> <span class="o">=</span> <span class="n">rcParams</span>
-</span><span id="L-204"><a href="#L-204"><span class="linenos">204</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">showfigs</span> <span class="o">=</span> <span class="n">showfigs</span>
-</span><span id="L-205"><a href="#L-205"><span class="linenos">205</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span>
-</span><span id="L-206"><a href="#L-206"><span class="linenos">206</span></a>        
-</span><span id="L-207"><a href="#L-207"><span class="linenos">207</span></a>        <span class="c1"># (2) Set global plot settings using rcParams</span>
-</span><span id="L-208"><a href="#L-208"><span class="linenos">208</span></a>        <span class="n">PlotParameters</span><span class="o">.</span><span class="n">set_default_rcParams</span><span class="p">(</span><span class="n">rcParams</span><span class="p">)</span>
-</span><span id="L-209"><a href="#L-209"><span class="linenos">209</span></a>        
-</span><span id="L-210"><a href="#L-210"><span class="linenos">210</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-211"><a href="#L-211"><span class="linenos">211</span></a>    <span class="k">def</span> <span class="nf">set_default_rcParams</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">my_rcParams</span><span class="o">=</span><span class="p">{}):</span>
-</span><span id="L-212"><a href="#L-212"><span class="linenos">212</span></a>        <span class="sd">&#39;&#39;&#39;</span>
-</span><span id="L-213"><a href="#L-213"><span class="linenos">213</span></a><span class="sd">        A class method defining global plot parameters (plt.rcParams).</span>
-</span><span id="L-214"><a href="#L-214"><span class="linenos">214</span></a><span class="sd">        </span>
-</span><span id="L-215"><a href="#L-215"><span class="linenos">215</span></a><span class="sd">        Parameters</span>
-</span><span id="L-216"><a href="#L-216"><span class="linenos">216</span></a><span class="sd">        ----------</span>
-</span><span id="L-217"><a href="#L-217"><span class="linenos">217</span></a><span class="sd">        my_rcParams : dict</span>
-</span><span id="L-218"><a href="#L-218"><span class="linenos">218</span></a><span class="sd">            The dictionary re-defines selected plt.rcParams keys.</span>
-</span><span id="L-219"><a href="#L-219"><span class="linenos">219</span></a><span class="sd">            </span>
-</span><span id="L-220"><a href="#L-220"><span class="linenos">220</span></a><span class="sd">            Example:</span>
-</span><span id="L-221"><a href="#L-221"><span class="linenos">221</span></a><span class="sd">                </span>
-</span><span id="L-222"><a href="#L-222"><span class="linenos">222</span></a><span class="sd">            &gt;&gt;&gt; PlotParameters.set_default_rcParams({&#39;figure.dpi&#39;:500})</span>
-</span><span id="L-223"><a href="#L-223"><span class="linenos">223</span></a><span class="sd">            </span>
-</span><span id="L-224"><a href="#L-224"><span class="linenos">224</span></a><span class="sd">        Returns</span>
-</span><span id="L-225"><a href="#L-225"><span class="linenos">225</span></a><span class="sd">        -------</span>
-</span><span id="L-226"><a href="#L-226"><span class="linenos">226</span></a><span class="sd">        None</span>
-</span><span id="L-227"><a href="#L-227"><span class="linenos">227</span></a><span class="sd">            The function does not return anything,</span>
-</span><span id="L-228"><a href="#L-228"><span class="linenos">228</span></a><span class="sd">            BUT it re-defines the global variable rcParams.</span>
-</span><span id="L-229"><a href="#L-229"><span class="linenos">229</span></a>
-</span><span id="L-230"><a href="#L-230"><span class="linenos">230</span></a><span class="sd">        Notes</span>
-</span><span id="L-231"><a href="#L-231"><span class="linenos">231</span></a><span class="sd">        -----</span>
-</span><span id="L-232"><a href="#L-232"><span class="linenos">232</span></a><span class="sd">        * This is a @classmethod (because it is used within the whole class)</span>
-</span><span id="L-233"><a href="#L-233"><span class="linenos">233</span></a><span class="sd">          but it could be a @staticmethod as well (because it does not use</span>
-</span><span id="L-234"><a href="#L-234"><span class="linenos">234</span></a><span class="sd">          cls variable in fact).</span>
-</span><span id="L-235"><a href="#L-235"><span class="linenos">235</span></a><span class="sd">        * The method is employed in two ways:</span>
-</span><span id="L-236"><a href="#L-236"><span class="linenos">236</span></a><span class="sd">            - Standard usage of MCREEP package: default rcParams are used</span>
-</span><span id="L-237"><a href="#L-237"><span class="linenos">237</span></a><span class="sd">              (and possibly modified) in objects of PlotParameters class.</span>
-</span><span id="L-238"><a href="#L-238"><span class="linenos">238</span></a><span class="sd">            - Special usage of MCREEP (more figures, multiplots): default</span>
-</span><span id="L-239"><a href="#L-239"><span class="linenos">239</span></a><span class="sd">              rcParams are used when definining the axes of (multiple) figures.</span>
-</span><span id="L-240"><a href="#L-240"><span class="linenos">240</span></a><span class="sd">        &#39;&#39;&#39;</span>
-</span><span id="L-241"><a href="#L-241"><span class="linenos">241</span></a>        
-</span><span id="L-242"><a href="#L-242"><span class="linenos">242</span></a>        <span class="c1"># (1) Set default rcParams</span>
-</span><span id="L-243"><a href="#L-243"><span class="linenos">243</span></a>        <span class="c1"># (Hardcoded, suitable default for standard plots</span>
-</span><span id="L-244"><a href="#L-244"><span class="linenos">244</span></a>        <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
-</span><span id="L-245"><a href="#L-245"><span class="linenos">245</span></a>            <span class="s1">&#39;figure.figsize&#39;</span>     <span class="p">:</span> <span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="mf">2.54</span><span class="p">,</span><span class="mi">6</span><span class="o">/</span><span class="mf">2.54</span><span class="p">),</span>
-</span><span id="L-246"><a href="#L-246"><span class="linenos">246</span></a>            <span class="s1">&#39;figure.dpi&#39;</span>         <span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
-</span><span id="L-247"><a href="#L-247"><span class="linenos">247</span></a>            <span class="s1">&#39;font.size&#39;</span>          <span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-</span><span id="L-248"><a href="#L-248"><span class="linenos">248</span></a>            <span class="s1">&#39;lines.linewidth&#39;</span>    <span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
-</span><span id="L-249"><a href="#L-249"><span class="linenos">249</span></a>            <span class="s1">&#39;axes.linewidth&#39;</span>     <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
-</span><span id="L-250"><a href="#L-250"><span class="linenos">250</span></a>            <span class="s1">&#39;xtick.major.width&#39;</span>  <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
-</span><span id="L-251"><a href="#L-251"><span class="linenos">251</span></a>            <span class="s1">&#39;ytick.major.width&#39;</span>  <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
-</span><span id="L-252"><a href="#L-252"><span class="linenos">252</span></a>            <span class="s1">&#39;grid.linewidth&#39;</span>     <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
-</span><span id="L-253"><a href="#L-253"><span class="linenos">253</span></a>            <span class="s1">&#39;grid.linestyle&#39;</span>     <span class="p">:</span> <span class="s1">&#39;:&#39;</span><span class="p">})</span>
-</span><span id="L-254"><a href="#L-254"><span class="linenos">254</span></a>        
-</span><span id="L-255"><a href="#L-255"><span class="linenos">255</span></a>        <span class="c1"># (2) Update default with argument rcParams, if it was given</span>
-</span><span id="L-256"><a href="#L-256"><span class="linenos">256</span></a>        <span class="c1"># (User-defined in the main program, if necessary</span>
-</span><span id="L-257"><a href="#L-257"><span class="linenos">257</span></a>        <span class="c1"># (Useful namely for multiplots</span>
-</span><span id="L-258"><a href="#L-258"><span class="linenos">258</span></a>        <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">my_rcParams</span><span class="p">)</span>
+</span><span id="L-189"><a href="#L-189"><span class="linenos">189</span></a><span class="sd">          </span>
+</span><span id="L-190"><a href="#L-190"><span class="linenos">190</span></a><span class="sd">    legend_coordinates : None or tuple of two floats, optional, default is None</span>
+</span><span id="L-191"><a href="#L-191"><span class="linenos">191</span></a><span class="sd">        If not given (typical case)</span>
+</span><span id="L-192"><a href="#L-192"><span class="linenos">192</span></a><span class="sd">        some suitable default position of legend argument will be set.</span>
+</span><span id="L-193"><a href="#L-193"><span class="linenos">193</span></a><span class="sd">        If the argument is given,</span>
+</span><span id="L-194"><a href="#L-194"><span class="linenos">194</span></a><span class="sd">        the legend is placed at given position within the graph;</span>
+</span><span id="L-195"><a href="#L-195"><span class="linenos">195</span></a><span class="sd">        *legend_coordinates* = upper left corner, in fractional coordinates.</span>
+</span><span id="L-196"><a href="#L-196"><span class="linenos">196</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="L-197"><a href="#L-197"><span class="linenos">197</span></a>    
+</span><span id="L-198"><a href="#L-198"><span class="linenos">198</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span>
+</span><span id="L-199"><a href="#L-199"><span class="linenos">199</span></a>                 <span class="n">logscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">e_to_percent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rcParams</span><span class="o">=</span><span class="p">{},</span>
+</span><span id="L-200"><a href="#L-200"><span class="linenos">200</span></a>                 <span class="n">showfigs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">legend_coordinates</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span><span id="L-201"><a href="#L-201"><span class="linenos">201</span></a>        <span class="c1"># Docstring for __init__ is given above in the class definition.</span>
+</span><span id="L-202"><a href="#L-202"><span class="linenos">202</span></a>        <span class="c1"># Reason: consistent help in Spyder and Pdoc.</span>
+</span><span id="L-203"><a href="#L-203"><span class="linenos">203</span></a>        <span class="c1"># -----        </span>
+</span><span id="L-204"><a href="#L-204"><span class="linenos">204</span></a>        
+</span><span id="L-205"><a href="#L-205"><span class="linenos">205</span></a>        <span class="c1"># (1) Initialize basic parameters</span>
+</span><span id="L-206"><a href="#L-206"><span class="linenos">206</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span>
+</span><span id="L-207"><a href="#L-207"><span class="linenos">207</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span>
+</span><span id="L-208"><a href="#L-208"><span class="linenos">208</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">logscale</span> <span class="o">=</span> <span class="n">logscale</span>
+</span><span id="L-209"><a href="#L-209"><span class="linenos">209</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">e_to_percent</span> <span class="o">=</span> <span class="n">e_to_percent</span>
+</span><span id="L-210"><a href="#L-210"><span class="linenos">210</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">rcParams</span> <span class="o">=</span> <span class="n">rcParams</span>
+</span><span id="L-211"><a href="#L-211"><span class="linenos">211</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">showfigs</span> <span class="o">=</span> <span class="n">showfigs</span>
+</span><span id="L-212"><a href="#L-212"><span class="linenos">212</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span>
+</span><span id="L-213"><a href="#L-213"><span class="linenos">213</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">legend_coordinates</span> <span class="o">=</span> <span class="n">legend_coordinates</span>
+</span><span id="L-214"><a href="#L-214"><span class="linenos">214</span></a>        
+</span><span id="L-215"><a href="#L-215"><span class="linenos">215</span></a>        <span class="c1"># (2) Set global plot settings using rcParams</span>
+</span><span id="L-216"><a href="#L-216"><span class="linenos">216</span></a>        <span class="n">PlotParameters</span><span class="o">.</span><span class="n">set_default_rcParams</span><span class="p">(</span><span class="n">rcParams</span><span class="p">)</span>
+</span><span id="L-217"><a href="#L-217"><span class="linenos">217</span></a>        
+</span><span id="L-218"><a href="#L-218"><span class="linenos">218</span></a>    <span class="nd">@classmethod</span>
+</span><span id="L-219"><a href="#L-219"><span class="linenos">219</span></a>    <span class="k">def</span> <span class="nf">set_default_rcParams</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">my_rcParams</span><span class="o">=</span><span class="p">{}):</span>
+</span><span id="L-220"><a href="#L-220"><span class="linenos">220</span></a>        <span class="sd">&#39;&#39;&#39;</span>
+</span><span id="L-221"><a href="#L-221"><span class="linenos">221</span></a><span class="sd">        A class method defining global plot parameters (plt.rcParams).</span>
+</span><span id="L-222"><a href="#L-222"><span class="linenos">222</span></a><span class="sd">        </span>
+</span><span id="L-223"><a href="#L-223"><span class="linenos">223</span></a><span class="sd">        Parameters</span>
+</span><span id="L-224"><a href="#L-224"><span class="linenos">224</span></a><span class="sd">        ----------</span>
+</span><span id="L-225"><a href="#L-225"><span class="linenos">225</span></a><span class="sd">        my_rcParams : dict</span>
+</span><span id="L-226"><a href="#L-226"><span class="linenos">226</span></a><span class="sd">            The dictionary re-defines selected plt.rcParams keys.</span>
+</span><span id="L-227"><a href="#L-227"><span class="linenos">227</span></a><span class="sd">            </span>
+</span><span id="L-228"><a href="#L-228"><span class="linenos">228</span></a><span class="sd">            Example:</span>
+</span><span id="L-229"><a href="#L-229"><span class="linenos">229</span></a><span class="sd">                </span>
+</span><span id="L-230"><a href="#L-230"><span class="linenos">230</span></a><span class="sd">            &gt;&gt;&gt; PlotParameters.set_default_rcParams({&#39;figure.dpi&#39;:500})</span>
+</span><span id="L-231"><a href="#L-231"><span class="linenos">231</span></a><span class="sd">            </span>
+</span><span id="L-232"><a href="#L-232"><span class="linenos">232</span></a><span class="sd">        Returns</span>
+</span><span id="L-233"><a href="#L-233"><span class="linenos">233</span></a><span class="sd">        -------</span>
+</span><span id="L-234"><a href="#L-234"><span class="linenos">234</span></a><span class="sd">        None</span>
+</span><span id="L-235"><a href="#L-235"><span class="linenos">235</span></a><span class="sd">            The function does not return anything,</span>
+</span><span id="L-236"><a href="#L-236"><span class="linenos">236</span></a><span class="sd">            BUT it re-defines the global variable rcParams.</span>
+</span><span id="L-237"><a href="#L-237"><span class="linenos">237</span></a>
+</span><span id="L-238"><a href="#L-238"><span class="linenos">238</span></a><span class="sd">        Notes</span>
+</span><span id="L-239"><a href="#L-239"><span class="linenos">239</span></a><span class="sd">        -----</span>
+</span><span id="L-240"><a href="#L-240"><span class="linenos">240</span></a><span class="sd">        * This is a @classmethod (because it is used within the whole class)</span>
+</span><span id="L-241"><a href="#L-241"><span class="linenos">241</span></a><span class="sd">          but it could be a @staticmethod as well (because it does not use</span>
+</span><span id="L-242"><a href="#L-242"><span class="linenos">242</span></a><span class="sd">          cls variable in fact).</span>
+</span><span id="L-243"><a href="#L-243"><span class="linenos">243</span></a><span class="sd">        * The method is employed in two ways:</span>
+</span><span id="L-244"><a href="#L-244"><span class="linenos">244</span></a><span class="sd">            - Standard usage of MCREEP package: default rcParams are used</span>
+</span><span id="L-245"><a href="#L-245"><span class="linenos">245</span></a><span class="sd">              (and possibly modified) in objects of PlotParameters class.</span>
+</span><span id="L-246"><a href="#L-246"><span class="linenos">246</span></a><span class="sd">            - Special usage of MCREEP (more figures, multiplots): default</span>
+</span><span id="L-247"><a href="#L-247"><span class="linenos">247</span></a><span class="sd">              rcParams are used when definining the axes of (multiple) figures.</span>
+</span><span id="L-248"><a href="#L-248"><span class="linenos">248</span></a><span class="sd">        &#39;&#39;&#39;</span>
+</span><span id="L-249"><a href="#L-249"><span class="linenos">249</span></a>        
+</span><span id="L-250"><a href="#L-250"><span class="linenos">250</span></a>        <span class="c1"># (1) Set default rcParams</span>
+</span><span id="L-251"><a href="#L-251"><span class="linenos">251</span></a>        <span class="c1"># (Hardcoded, suitable default for standard plots</span>
+</span><span id="L-252"><a href="#L-252"><span class="linenos">252</span></a>        <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+</span><span id="L-253"><a href="#L-253"><span class="linenos">253</span></a>            <span class="s1">&#39;figure.figsize&#39;</span>     <span class="p">:</span> <span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="mf">2.54</span><span class="p">,</span><span class="mi">6</span><span class="o">/</span><span class="mf">2.54</span><span class="p">),</span>
+</span><span id="L-254"><a href="#L-254"><span class="linenos">254</span></a>            <span class="s1">&#39;figure.dpi&#39;</span>         <span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+</span><span id="L-255"><a href="#L-255"><span class="linenos">255</span></a>            <span class="s1">&#39;font.size&#39;</span>          <span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+</span><span id="L-256"><a href="#L-256"><span class="linenos">256</span></a>            <span class="s1">&#39;lines.linewidth&#39;</span>    <span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+</span><span id="L-257"><a href="#L-257"><span class="linenos">257</span></a>            <span class="s1">&#39;axes.linewidth&#39;</span>     <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+</span><span id="L-258"><a href="#L-258"><span class="linenos">258</span></a>            <span class="s1">&#39;xtick.major.width&#39;</span>  <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+</span><span id="L-259"><a href="#L-259"><span class="linenos">259</span></a>            <span class="s1">&#39;ytick.major.width&#39;</span>  <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+</span><span id="L-260"><a href="#L-260"><span class="linenos">260</span></a>            <span class="s1">&#39;grid.linewidth&#39;</span>     <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+</span><span id="L-261"><a href="#L-261"><span class="linenos">261</span></a>            <span class="s1">&#39;grid.linestyle&#39;</span>     <span class="p">:</span> <span class="s1">&#39;:&#39;</span><span class="p">})</span>
+</span><span id="L-262"><a href="#L-262"><span class="linenos">262</span></a>        
+</span><span id="L-263"><a href="#L-263"><span class="linenos">263</span></a>        <span class="c1"># (2) Update default with argument rcParams, if it was given</span>
+</span><span id="L-264"><a href="#L-264"><span class="linenos">264</span></a>        <span class="c1"># (User-defined in the main program, if necessary</span>
+</span><span id="L-265"><a href="#L-265"><span class="linenos">265</span></a>        <span class="c1"># (Useful namely for multiplots</span>
+</span><span id="L-266"><a href="#L-266"><span class="linenos">266</span></a>        <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">my_rcParams</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -751,76 +759,84 @@ this conversion is necessary for the following calculations.</li>
 </span><span id="PlotParameters-187"><a href="#PlotParameters-187"><span class="linenos">187</span></a><span class="sd">        * If ax is defined, create the plot within given ax object,</span>
 </span><span id="PlotParameters-188"><a href="#PlotParameters-188"><span class="linenos">188</span></a><span class="sd">          which can combined with `fig,ax = plt.subplots()`</span>
 </span><span id="PlotParameters-189"><a href="#PlotParameters-189"><span class="linenos">189</span></a><span class="sd">          in order to create multile figures.</span>
-</span><span id="PlotParameters-190"><a href="#PlotParameters-190"><span class="linenos">190</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="PlotParameters-191"><a href="#PlotParameters-191"><span class="linenos">191</span></a>    
-</span><span id="PlotParameters-192"><a href="#PlotParameters-192"><span class="linenos">192</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span>
-</span><span id="PlotParameters-193"><a href="#PlotParameters-193"><span class="linenos">193</span></a>                 <span class="n">logscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">e_to_percent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="PlotParameters-194"><a href="#PlotParameters-194"><span class="linenos">194</span></a>                 <span class="n">rcParams</span><span class="o">=</span><span class="p">{},</span> <span class="n">showfigs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="PlotParameters-195"><a href="#PlotParameters-195"><span class="linenos">195</span></a>        <span class="c1"># Docstring for __init__ is given above in the class definition.</span>
-</span><span id="PlotParameters-196"><a href="#PlotParameters-196"><span class="linenos">196</span></a>        <span class="c1"># Reason: consistent help in Spyder and Pdoc.</span>
-</span><span id="PlotParameters-197"><a href="#PlotParameters-197"><span class="linenos">197</span></a>        <span class="c1"># -----        </span>
-</span><span id="PlotParameters-198"><a href="#PlotParameters-198"><span class="linenos">198</span></a>        
-</span><span id="PlotParameters-199"><a href="#PlotParameters-199"><span class="linenos">199</span></a>        <span class="c1"># (1) Initialize basic parameters</span>
-</span><span id="PlotParameters-200"><a href="#PlotParameters-200"><span class="linenos">200</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span>
-</span><span id="PlotParameters-201"><a href="#PlotParameters-201"><span class="linenos">201</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span>
-</span><span id="PlotParameters-202"><a href="#PlotParameters-202"><span class="linenos">202</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">logscale</span> <span class="o">=</span> <span class="n">logscale</span>
-</span><span id="PlotParameters-203"><a href="#PlotParameters-203"><span class="linenos">203</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">e_to_percent</span> <span class="o">=</span> <span class="n">e_to_percent</span>
-</span><span id="PlotParameters-204"><a href="#PlotParameters-204"><span class="linenos">204</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">rcParams</span> <span class="o">=</span> <span class="n">rcParams</span>
-</span><span id="PlotParameters-205"><a href="#PlotParameters-205"><span class="linenos">205</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">showfigs</span> <span class="o">=</span> <span class="n">showfigs</span>
-</span><span id="PlotParameters-206"><a href="#PlotParameters-206"><span class="linenos">206</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span>
-</span><span id="PlotParameters-207"><a href="#PlotParameters-207"><span class="linenos">207</span></a>        
-</span><span id="PlotParameters-208"><a href="#PlotParameters-208"><span class="linenos">208</span></a>        <span class="c1"># (2) Set global plot settings using rcParams</span>
-</span><span id="PlotParameters-209"><a href="#PlotParameters-209"><span class="linenos">209</span></a>        <span class="n">PlotParameters</span><span class="o">.</span><span class="n">set_default_rcParams</span><span class="p">(</span><span class="n">rcParams</span><span class="p">)</span>
-</span><span id="PlotParameters-210"><a href="#PlotParameters-210"><span class="linenos">210</span></a>        
-</span><span id="PlotParameters-211"><a href="#PlotParameters-211"><span class="linenos">211</span></a>    <span class="nd">@classmethod</span>
-</span><span id="PlotParameters-212"><a href="#PlotParameters-212"><span class="linenos">212</span></a>    <span class="k">def</span> <span class="nf">set_default_rcParams</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">my_rcParams</span><span class="o">=</span><span class="p">{}):</span>
-</span><span id="PlotParameters-213"><a href="#PlotParameters-213"><span class="linenos">213</span></a>        <span class="sd">&#39;&#39;&#39;</span>
-</span><span id="PlotParameters-214"><a href="#PlotParameters-214"><span class="linenos">214</span></a><span class="sd">        A class method defining global plot parameters (plt.rcParams).</span>
-</span><span id="PlotParameters-215"><a href="#PlotParameters-215"><span class="linenos">215</span></a><span class="sd">        </span>
-</span><span id="PlotParameters-216"><a href="#PlotParameters-216"><span class="linenos">216</span></a><span class="sd">        Parameters</span>
-</span><span id="PlotParameters-217"><a href="#PlotParameters-217"><span class="linenos">217</span></a><span class="sd">        ----------</span>
-</span><span id="PlotParameters-218"><a href="#PlotParameters-218"><span class="linenos">218</span></a><span class="sd">        my_rcParams : dict</span>
-</span><span id="PlotParameters-219"><a href="#PlotParameters-219"><span class="linenos">219</span></a><span class="sd">            The dictionary re-defines selected plt.rcParams keys.</span>
-</span><span id="PlotParameters-220"><a href="#PlotParameters-220"><span class="linenos">220</span></a><span class="sd">            </span>
-</span><span id="PlotParameters-221"><a href="#PlotParameters-221"><span class="linenos">221</span></a><span class="sd">            Example:</span>
-</span><span id="PlotParameters-222"><a href="#PlotParameters-222"><span class="linenos">222</span></a><span class="sd">                </span>
-</span><span id="PlotParameters-223"><a href="#PlotParameters-223"><span class="linenos">223</span></a><span class="sd">            &gt;&gt;&gt; PlotParameters.set_default_rcParams({&#39;figure.dpi&#39;:500})</span>
-</span><span id="PlotParameters-224"><a href="#PlotParameters-224"><span class="linenos">224</span></a><span class="sd">            </span>
-</span><span id="PlotParameters-225"><a href="#PlotParameters-225"><span class="linenos">225</span></a><span class="sd">        Returns</span>
-</span><span id="PlotParameters-226"><a href="#PlotParameters-226"><span class="linenos">226</span></a><span class="sd">        -------</span>
-</span><span id="PlotParameters-227"><a href="#PlotParameters-227"><span class="linenos">227</span></a><span class="sd">        None</span>
-</span><span id="PlotParameters-228"><a href="#PlotParameters-228"><span class="linenos">228</span></a><span class="sd">            The function does not return anything,</span>
-</span><span id="PlotParameters-229"><a href="#PlotParameters-229"><span class="linenos">229</span></a><span class="sd">            BUT it re-defines the global variable rcParams.</span>
-</span><span id="PlotParameters-230"><a href="#PlotParameters-230"><span class="linenos">230</span></a>
-</span><span id="PlotParameters-231"><a href="#PlotParameters-231"><span class="linenos">231</span></a><span class="sd">        Notes</span>
-</span><span id="PlotParameters-232"><a href="#PlotParameters-232"><span class="linenos">232</span></a><span class="sd">        -----</span>
-</span><span id="PlotParameters-233"><a href="#PlotParameters-233"><span class="linenos">233</span></a><span class="sd">        * This is a @classmethod (because it is used within the whole class)</span>
-</span><span id="PlotParameters-234"><a href="#PlotParameters-234"><span class="linenos">234</span></a><span class="sd">          but it could be a @staticmethod as well (because it does not use</span>
-</span><span id="PlotParameters-235"><a href="#PlotParameters-235"><span class="linenos">235</span></a><span class="sd">          cls variable in fact).</span>
-</span><span id="PlotParameters-236"><a href="#PlotParameters-236"><span class="linenos">236</span></a><span class="sd">        * The method is employed in two ways:</span>
-</span><span id="PlotParameters-237"><a href="#PlotParameters-237"><span class="linenos">237</span></a><span class="sd">            - Standard usage of MCREEP package: default rcParams are used</span>
-</span><span id="PlotParameters-238"><a href="#PlotParameters-238"><span class="linenos">238</span></a><span class="sd">              (and possibly modified) in objects of PlotParameters class.</span>
-</span><span id="PlotParameters-239"><a href="#PlotParameters-239"><span class="linenos">239</span></a><span class="sd">            - Special usage of MCREEP (more figures, multiplots): default</span>
-</span><span id="PlotParameters-240"><a href="#PlotParameters-240"><span class="linenos">240</span></a><span class="sd">              rcParams are used when definining the axes of (multiple) figures.</span>
-</span><span id="PlotParameters-241"><a href="#PlotParameters-241"><span class="linenos">241</span></a><span class="sd">        &#39;&#39;&#39;</span>
-</span><span id="PlotParameters-242"><a href="#PlotParameters-242"><span class="linenos">242</span></a>        
-</span><span id="PlotParameters-243"><a href="#PlotParameters-243"><span class="linenos">243</span></a>        <span class="c1"># (1) Set default rcParams</span>
-</span><span id="PlotParameters-244"><a href="#PlotParameters-244"><span class="linenos">244</span></a>        <span class="c1"># (Hardcoded, suitable default for standard plots</span>
-</span><span id="PlotParameters-245"><a href="#PlotParameters-245"><span class="linenos">245</span></a>        <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
-</span><span id="PlotParameters-246"><a href="#PlotParameters-246"><span class="linenos">246</span></a>            <span class="s1">&#39;figure.figsize&#39;</span>     <span class="p">:</span> <span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="mf">2.54</span><span class="p">,</span><span class="mi">6</span><span class="o">/</span><span class="mf">2.54</span><span class="p">),</span>
-</span><span id="PlotParameters-247"><a href="#PlotParameters-247"><span class="linenos">247</span></a>            <span class="s1">&#39;figure.dpi&#39;</span>         <span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
-</span><span id="PlotParameters-248"><a href="#PlotParameters-248"><span class="linenos">248</span></a>            <span class="s1">&#39;font.size&#39;</span>          <span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-</span><span id="PlotParameters-249"><a href="#PlotParameters-249"><span class="linenos">249</span></a>            <span class="s1">&#39;lines.linewidth&#39;</span>    <span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
-</span><span id="PlotParameters-250"><a href="#PlotParameters-250"><span class="linenos">250</span></a>            <span class="s1">&#39;axes.linewidth&#39;</span>     <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
-</span><span id="PlotParameters-251"><a href="#PlotParameters-251"><span class="linenos">251</span></a>            <span class="s1">&#39;xtick.major.width&#39;</span>  <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
-</span><span id="PlotParameters-252"><a href="#PlotParameters-252"><span class="linenos">252</span></a>            <span class="s1">&#39;ytick.major.width&#39;</span>  <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
-</span><span id="PlotParameters-253"><a href="#PlotParameters-253"><span class="linenos">253</span></a>            <span class="s1">&#39;grid.linewidth&#39;</span>     <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
-</span><span id="PlotParameters-254"><a href="#PlotParameters-254"><span class="linenos">254</span></a>            <span class="s1">&#39;grid.linestyle&#39;</span>     <span class="p">:</span> <span class="s1">&#39;:&#39;</span><span class="p">})</span>
-</span><span id="PlotParameters-255"><a href="#PlotParameters-255"><span class="linenos">255</span></a>        
-</span><span id="PlotParameters-256"><a href="#PlotParameters-256"><span class="linenos">256</span></a>        <span class="c1"># (2) Update default with argument rcParams, if it was given</span>
-</span><span id="PlotParameters-257"><a href="#PlotParameters-257"><span class="linenos">257</span></a>        <span class="c1"># (User-defined in the main program, if necessary</span>
-</span><span id="PlotParameters-258"><a href="#PlotParameters-258"><span class="linenos">258</span></a>        <span class="c1"># (Useful namely for multiplots</span>
-</span><span id="PlotParameters-259"><a href="#PlotParameters-259"><span class="linenos">259</span></a>        <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">my_rcParams</span><span class="p">)</span>
+</span><span id="PlotParameters-190"><a href="#PlotParameters-190"><span class="linenos">190</span></a><span class="sd">          </span>
+</span><span id="PlotParameters-191"><a href="#PlotParameters-191"><span class="linenos">191</span></a><span class="sd">    legend_coordinates : None or tuple of two floats, optional, default is None</span>
+</span><span id="PlotParameters-192"><a href="#PlotParameters-192"><span class="linenos">192</span></a><span class="sd">        If not given (typical case)</span>
+</span><span id="PlotParameters-193"><a href="#PlotParameters-193"><span class="linenos">193</span></a><span class="sd">        some suitable default position of legend argument will be set.</span>
+</span><span id="PlotParameters-194"><a href="#PlotParameters-194"><span class="linenos">194</span></a><span class="sd">        If the argument is given,</span>
+</span><span id="PlotParameters-195"><a href="#PlotParameters-195"><span class="linenos">195</span></a><span class="sd">        the legend is placed at given position within the graph;</span>
+</span><span id="PlotParameters-196"><a href="#PlotParameters-196"><span class="linenos">196</span></a><span class="sd">        *legend_coordinates* = upper left corner, in fractional coordinates.</span>
+</span><span id="PlotParameters-197"><a href="#PlotParameters-197"><span class="linenos">197</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="PlotParameters-198"><a href="#PlotParameters-198"><span class="linenos">198</span></a>    
+</span><span id="PlotParameters-199"><a href="#PlotParameters-199"><span class="linenos">199</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span>
+</span><span id="PlotParameters-200"><a href="#PlotParameters-200"><span class="linenos">200</span></a>                 <span class="n">logscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">e_to_percent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rcParams</span><span class="o">=</span><span class="p">{},</span>
+</span><span id="PlotParameters-201"><a href="#PlotParameters-201"><span class="linenos">201</span></a>                 <span class="n">showfigs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">legend_coordinates</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span><span id="PlotParameters-202"><a href="#PlotParameters-202"><span class="linenos">202</span></a>        <span class="c1"># Docstring for __init__ is given above in the class definition.</span>
+</span><span id="PlotParameters-203"><a href="#PlotParameters-203"><span class="linenos">203</span></a>        <span class="c1"># Reason: consistent help in Spyder and Pdoc.</span>
+</span><span id="PlotParameters-204"><a href="#PlotParameters-204"><span class="linenos">204</span></a>        <span class="c1"># -----        </span>
+</span><span id="PlotParameters-205"><a href="#PlotParameters-205"><span class="linenos">205</span></a>        
+</span><span id="PlotParameters-206"><a href="#PlotParameters-206"><span class="linenos">206</span></a>        <span class="c1"># (1) Initialize basic parameters</span>
+</span><span id="PlotParameters-207"><a href="#PlotParameters-207"><span class="linenos">207</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span>
+</span><span id="PlotParameters-208"><a href="#PlotParameters-208"><span class="linenos">208</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span>
+</span><span id="PlotParameters-209"><a href="#PlotParameters-209"><span class="linenos">209</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">logscale</span> <span class="o">=</span> <span class="n">logscale</span>
+</span><span id="PlotParameters-210"><a href="#PlotParameters-210"><span class="linenos">210</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">e_to_percent</span> <span class="o">=</span> <span class="n">e_to_percent</span>
+</span><span id="PlotParameters-211"><a href="#PlotParameters-211"><span class="linenos">211</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">rcParams</span> <span class="o">=</span> <span class="n">rcParams</span>
+</span><span id="PlotParameters-212"><a href="#PlotParameters-212"><span class="linenos">212</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">showfigs</span> <span class="o">=</span> <span class="n">showfigs</span>
+</span><span id="PlotParameters-213"><a href="#PlotParameters-213"><span class="linenos">213</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span>
+</span><span id="PlotParameters-214"><a href="#PlotParameters-214"><span class="linenos">214</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">legend_coordinates</span> <span class="o">=</span> <span class="n">legend_coordinates</span>
+</span><span id="PlotParameters-215"><a href="#PlotParameters-215"><span class="linenos">215</span></a>        
+</span><span id="PlotParameters-216"><a href="#PlotParameters-216"><span class="linenos">216</span></a>        <span class="c1"># (2) Set global plot settings using rcParams</span>
+</span><span id="PlotParameters-217"><a href="#PlotParameters-217"><span class="linenos">217</span></a>        <span class="n">PlotParameters</span><span class="o">.</span><span class="n">set_default_rcParams</span><span class="p">(</span><span class="n">rcParams</span><span class="p">)</span>
+</span><span id="PlotParameters-218"><a href="#PlotParameters-218"><span class="linenos">218</span></a>        
+</span><span id="PlotParameters-219"><a href="#PlotParameters-219"><span class="linenos">219</span></a>    <span class="nd">@classmethod</span>
+</span><span id="PlotParameters-220"><a href="#PlotParameters-220"><span class="linenos">220</span></a>    <span class="k">def</span> <span class="nf">set_default_rcParams</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">my_rcParams</span><span class="o">=</span><span class="p">{}):</span>
+</span><span id="PlotParameters-221"><a href="#PlotParameters-221"><span class="linenos">221</span></a>        <span class="sd">&#39;&#39;&#39;</span>
+</span><span id="PlotParameters-222"><a href="#PlotParameters-222"><span class="linenos">222</span></a><span class="sd">        A class method defining global plot parameters (plt.rcParams).</span>
+</span><span id="PlotParameters-223"><a href="#PlotParameters-223"><span class="linenos">223</span></a><span class="sd">        </span>
+</span><span id="PlotParameters-224"><a href="#PlotParameters-224"><span class="linenos">224</span></a><span class="sd">        Parameters</span>
+</span><span id="PlotParameters-225"><a href="#PlotParameters-225"><span class="linenos">225</span></a><span class="sd">        ----------</span>
+</span><span id="PlotParameters-226"><a href="#PlotParameters-226"><span class="linenos">226</span></a><span class="sd">        my_rcParams : dict</span>
+</span><span id="PlotParameters-227"><a href="#PlotParameters-227"><span class="linenos">227</span></a><span class="sd">            The dictionary re-defines selected plt.rcParams keys.</span>
+</span><span id="PlotParameters-228"><a href="#PlotParameters-228"><span class="linenos">228</span></a><span class="sd">            </span>
+</span><span id="PlotParameters-229"><a href="#PlotParameters-229"><span class="linenos">229</span></a><span class="sd">            Example:</span>
+</span><span id="PlotParameters-230"><a href="#PlotParameters-230"><span class="linenos">230</span></a><span class="sd">                </span>
+</span><span id="PlotParameters-231"><a href="#PlotParameters-231"><span class="linenos">231</span></a><span class="sd">            &gt;&gt;&gt; PlotParameters.set_default_rcParams({&#39;figure.dpi&#39;:500})</span>
+</span><span id="PlotParameters-232"><a href="#PlotParameters-232"><span class="linenos">232</span></a><span class="sd">            </span>
+</span><span id="PlotParameters-233"><a href="#PlotParameters-233"><span class="linenos">233</span></a><span class="sd">        Returns</span>
+</span><span id="PlotParameters-234"><a href="#PlotParameters-234"><span class="linenos">234</span></a><span class="sd">        -------</span>
+</span><span id="PlotParameters-235"><a href="#PlotParameters-235"><span class="linenos">235</span></a><span class="sd">        None</span>
+</span><span id="PlotParameters-236"><a href="#PlotParameters-236"><span class="linenos">236</span></a><span class="sd">            The function does not return anything,</span>
+</span><span id="PlotParameters-237"><a href="#PlotParameters-237"><span class="linenos">237</span></a><span class="sd">            BUT it re-defines the global variable rcParams.</span>
+</span><span id="PlotParameters-238"><a href="#PlotParameters-238"><span class="linenos">238</span></a>
+</span><span id="PlotParameters-239"><a href="#PlotParameters-239"><span class="linenos">239</span></a><span class="sd">        Notes</span>
+</span><span id="PlotParameters-240"><a href="#PlotParameters-240"><span class="linenos">240</span></a><span class="sd">        -----</span>
+</span><span id="PlotParameters-241"><a href="#PlotParameters-241"><span class="linenos">241</span></a><span class="sd">        * This is a @classmethod (because it is used within the whole class)</span>
+</span><span id="PlotParameters-242"><a href="#PlotParameters-242"><span class="linenos">242</span></a><span class="sd">          but it could be a @staticmethod as well (because it does not use</span>
+</span><span id="PlotParameters-243"><a href="#PlotParameters-243"><span class="linenos">243</span></a><span class="sd">          cls variable in fact).</span>
+</span><span id="PlotParameters-244"><a href="#PlotParameters-244"><span class="linenos">244</span></a><span class="sd">        * The method is employed in two ways:</span>
+</span><span id="PlotParameters-245"><a href="#PlotParameters-245"><span class="linenos">245</span></a><span class="sd">            - Standard usage of MCREEP package: default rcParams are used</span>
+</span><span id="PlotParameters-246"><a href="#PlotParameters-246"><span class="linenos">246</span></a><span class="sd">              (and possibly modified) in objects of PlotParameters class.</span>
+</span><span id="PlotParameters-247"><a href="#PlotParameters-247"><span class="linenos">247</span></a><span class="sd">            - Special usage of MCREEP (more figures, multiplots): default</span>
+</span><span id="PlotParameters-248"><a href="#PlotParameters-248"><span class="linenos">248</span></a><span class="sd">              rcParams are used when definining the axes of (multiple) figures.</span>
+</span><span id="PlotParameters-249"><a href="#PlotParameters-249"><span class="linenos">249</span></a><span class="sd">        &#39;&#39;&#39;</span>
+</span><span id="PlotParameters-250"><a href="#PlotParameters-250"><span class="linenos">250</span></a>        
+</span><span id="PlotParameters-251"><a href="#PlotParameters-251"><span class="linenos">251</span></a>        <span class="c1"># (1) Set default rcParams</span>
+</span><span id="PlotParameters-252"><a href="#PlotParameters-252"><span class="linenos">252</span></a>        <span class="c1"># (Hardcoded, suitable default for standard plots</span>
+</span><span id="PlotParameters-253"><a href="#PlotParameters-253"><span class="linenos">253</span></a>        <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+</span><span id="PlotParameters-254"><a href="#PlotParameters-254"><span class="linenos">254</span></a>            <span class="s1">&#39;figure.figsize&#39;</span>     <span class="p">:</span> <span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="mf">2.54</span><span class="p">,</span><span class="mi">6</span><span class="o">/</span><span class="mf">2.54</span><span class="p">),</span>
+</span><span id="PlotParameters-255"><a href="#PlotParameters-255"><span class="linenos">255</span></a>            <span class="s1">&#39;figure.dpi&#39;</span>         <span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+</span><span id="PlotParameters-256"><a href="#PlotParameters-256"><span class="linenos">256</span></a>            <span class="s1">&#39;font.size&#39;</span>          <span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+</span><span id="PlotParameters-257"><a href="#PlotParameters-257"><span class="linenos">257</span></a>            <span class="s1">&#39;lines.linewidth&#39;</span>    <span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+</span><span id="PlotParameters-258"><a href="#PlotParameters-258"><span class="linenos">258</span></a>            <span class="s1">&#39;axes.linewidth&#39;</span>     <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+</span><span id="PlotParameters-259"><a href="#PlotParameters-259"><span class="linenos">259</span></a>            <span class="s1">&#39;xtick.major.width&#39;</span>  <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+</span><span id="PlotParameters-260"><a href="#PlotParameters-260"><span class="linenos">260</span></a>            <span class="s1">&#39;ytick.major.width&#39;</span>  <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+</span><span id="PlotParameters-261"><a href="#PlotParameters-261"><span class="linenos">261</span></a>            <span class="s1">&#39;grid.linewidth&#39;</span>     <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+</span><span id="PlotParameters-262"><a href="#PlotParameters-262"><span class="linenos">262</span></a>            <span class="s1">&#39;grid.linestyle&#39;</span>     <span class="p">:</span> <span class="s1">&#39;:&#39;</span><span class="p">})</span>
+</span><span id="PlotParameters-263"><a href="#PlotParameters-263"><span class="linenos">263</span></a>        
+</span><span id="PlotParameters-264"><a href="#PlotParameters-264"><span class="linenos">264</span></a>        <span class="c1"># (2) Update default with argument rcParams, if it was given</span>
+</span><span id="PlotParameters-265"><a href="#PlotParameters-265"><span class="linenos">265</span></a>        <span class="c1"># (User-defined in the main program, if necessary</span>
+</span><span id="PlotParameters-266"><a href="#PlotParameters-266"><span class="linenos">266</span></a>        <span class="c1"># (Useful namely for multiplots</span>
+</span><span id="PlotParameters-267"><a href="#PlotParameters-267"><span class="linenos">267</span></a>        <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">my_rcParams</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -857,6 +873,12 @@ which is a typical usage.</li>
 which can combined with <code>fig,ax = plt.subplots()</code>
 in order to create multile figures.</li>
 </ul></li>
+<li><strong>legend_coordinates</strong> (None or tuple of two floats, optional, default is None):
+If not given (typical case)
+some suitable default position of legend argument will be set.
+If the argument is given,
+the legend is placed at given position within the graph;
+<em>legend_coordinates</em> = upper left corner, in fractional coordinates.</li>
 </ul>
 </div>
 
@@ -865,30 +887,31 @@ in order to create multile figures.</li>
                                         <input id="PlotParameters.__init__-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
-        <span class="name">PlotParameters</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">xlabel</span>,</span><span class="param">	<span class="n">ylabel</span>,</span><span class="param">	<span class="n">logscale</span><span class="o">=</span><span class="kc">False</span>,</span><span class="param">	<span class="n">e_to_percent</span><span class="o">=</span><span class="kc">True</span>,</span><span class="param">	<span class="n">rcParams</span><span class="o">=</span><span class="p">{}</span>,</span><span class="param">	<span class="n">showfigs</span><span class="o">=</span><span class="kc">True</span>,</span><span class="param">	<span class="n">ax</span><span class="o">=</span><span class="kc">None</span></span>)</span>
+        <span class="name">PlotParameters</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">xlabel</span>,</span><span class="param">	<span class="n">ylabel</span>,</span><span class="param">	<span class="n">logscale</span><span class="o">=</span><span class="kc">False</span>,</span><span class="param">	<span class="n">e_to_percent</span><span class="o">=</span><span class="kc">True</span>,</span><span class="param">	<span class="n">rcParams</span><span class="o">=</span><span class="p">{}</span>,</span><span class="param">	<span class="n">showfigs</span><span class="o">=</span><span class="kc">True</span>,</span><span class="param">	<span class="n">ax</span><span class="o">=</span><span class="kc">None</span>,</span><span class="param">	<span class="n">legend_coordinates</span><span class="o">=</span><span class="kc">None</span></span>)</span>
 
                 <label class="view-source-button" for="PlotParameters.__init__-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#PlotParameters.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="PlotParameters.__init__-192"><a href="#PlotParameters.__init__-192"><span class="linenos">192</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span>
-</span><span id="PlotParameters.__init__-193"><a href="#PlotParameters.__init__-193"><span class="linenos">193</span></a>                 <span class="n">logscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">e_to_percent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="PlotParameters.__init__-194"><a href="#PlotParameters.__init__-194"><span class="linenos">194</span></a>                 <span class="n">rcParams</span><span class="o">=</span><span class="p">{},</span> <span class="n">showfigs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="PlotParameters.__init__-195"><a href="#PlotParameters.__init__-195"><span class="linenos">195</span></a>        <span class="c1"># Docstring for __init__ is given above in the class definition.</span>
-</span><span id="PlotParameters.__init__-196"><a href="#PlotParameters.__init__-196"><span class="linenos">196</span></a>        <span class="c1"># Reason: consistent help in Spyder and Pdoc.</span>
-</span><span id="PlotParameters.__init__-197"><a href="#PlotParameters.__init__-197"><span class="linenos">197</span></a>        <span class="c1"># -----        </span>
-</span><span id="PlotParameters.__init__-198"><a href="#PlotParameters.__init__-198"><span class="linenos">198</span></a>        
-</span><span id="PlotParameters.__init__-199"><a href="#PlotParameters.__init__-199"><span class="linenos">199</span></a>        <span class="c1"># (1) Initialize basic parameters</span>
-</span><span id="PlotParameters.__init__-200"><a href="#PlotParameters.__init__-200"><span class="linenos">200</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span>
-</span><span id="PlotParameters.__init__-201"><a href="#PlotParameters.__init__-201"><span class="linenos">201</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span>
-</span><span id="PlotParameters.__init__-202"><a href="#PlotParameters.__init__-202"><span class="linenos">202</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">logscale</span> <span class="o">=</span> <span class="n">logscale</span>
-</span><span id="PlotParameters.__init__-203"><a href="#PlotParameters.__init__-203"><span class="linenos">203</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">e_to_percent</span> <span class="o">=</span> <span class="n">e_to_percent</span>
-</span><span id="PlotParameters.__init__-204"><a href="#PlotParameters.__init__-204"><span class="linenos">204</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">rcParams</span> <span class="o">=</span> <span class="n">rcParams</span>
-</span><span id="PlotParameters.__init__-205"><a href="#PlotParameters.__init__-205"><span class="linenos">205</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">showfigs</span> <span class="o">=</span> <span class="n">showfigs</span>
-</span><span id="PlotParameters.__init__-206"><a href="#PlotParameters.__init__-206"><span class="linenos">206</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span>
-</span><span id="PlotParameters.__init__-207"><a href="#PlotParameters.__init__-207"><span class="linenos">207</span></a>        
-</span><span id="PlotParameters.__init__-208"><a href="#PlotParameters.__init__-208"><span class="linenos">208</span></a>        <span class="c1"># (2) Set global plot settings using rcParams</span>
-</span><span id="PlotParameters.__init__-209"><a href="#PlotParameters.__init__-209"><span class="linenos">209</span></a>        <span class="n">PlotParameters</span><span class="o">.</span><span class="n">set_default_rcParams</span><span class="p">(</span><span class="n">rcParams</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="PlotParameters.__init__-199"><a href="#PlotParameters.__init__-199"><span class="linenos">199</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span>
+</span><span id="PlotParameters.__init__-200"><a href="#PlotParameters.__init__-200"><span class="linenos">200</span></a>                 <span class="n">logscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">e_to_percent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rcParams</span><span class="o">=</span><span class="p">{},</span>
+</span><span id="PlotParameters.__init__-201"><a href="#PlotParameters.__init__-201"><span class="linenos">201</span></a>                 <span class="n">showfigs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">legend_coordinates</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span><span id="PlotParameters.__init__-202"><a href="#PlotParameters.__init__-202"><span class="linenos">202</span></a>        <span class="c1"># Docstring for __init__ is given above in the class definition.</span>
+</span><span id="PlotParameters.__init__-203"><a href="#PlotParameters.__init__-203"><span class="linenos">203</span></a>        <span class="c1"># Reason: consistent help in Spyder and Pdoc.</span>
+</span><span id="PlotParameters.__init__-204"><a href="#PlotParameters.__init__-204"><span class="linenos">204</span></a>        <span class="c1"># -----        </span>
+</span><span id="PlotParameters.__init__-205"><a href="#PlotParameters.__init__-205"><span class="linenos">205</span></a>        
+</span><span id="PlotParameters.__init__-206"><a href="#PlotParameters.__init__-206"><span class="linenos">206</span></a>        <span class="c1"># (1) Initialize basic parameters</span>
+</span><span id="PlotParameters.__init__-207"><a href="#PlotParameters.__init__-207"><span class="linenos">207</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span>
+</span><span id="PlotParameters.__init__-208"><a href="#PlotParameters.__init__-208"><span class="linenos">208</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span>
+</span><span id="PlotParameters.__init__-209"><a href="#PlotParameters.__init__-209"><span class="linenos">209</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">logscale</span> <span class="o">=</span> <span class="n">logscale</span>
+</span><span id="PlotParameters.__init__-210"><a href="#PlotParameters.__init__-210"><span class="linenos">210</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">e_to_percent</span> <span class="o">=</span> <span class="n">e_to_percent</span>
+</span><span id="PlotParameters.__init__-211"><a href="#PlotParameters.__init__-211"><span class="linenos">211</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">rcParams</span> <span class="o">=</span> <span class="n">rcParams</span>
+</span><span id="PlotParameters.__init__-212"><a href="#PlotParameters.__init__-212"><span class="linenos">212</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">showfigs</span> <span class="o">=</span> <span class="n">showfigs</span>
+</span><span id="PlotParameters.__init__-213"><a href="#PlotParameters.__init__-213"><span class="linenos">213</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span>
+</span><span id="PlotParameters.__init__-214"><a href="#PlotParameters.__init__-214"><span class="linenos">214</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">legend_coordinates</span> <span class="o">=</span> <span class="n">legend_coordinates</span>
+</span><span id="PlotParameters.__init__-215"><a href="#PlotParameters.__init__-215"><span class="linenos">215</span></a>        
+</span><span id="PlotParameters.__init__-216"><a href="#PlotParameters.__init__-216"><span class="linenos">216</span></a>        <span class="c1"># (2) Set global plot settings using rcParams</span>
+</span><span id="PlotParameters.__init__-217"><a href="#PlotParameters.__init__-217"><span class="linenos">217</span></a>        <span class="n">PlotParameters</span><span class="o">.</span><span class="n">set_default_rcParams</span><span class="p">(</span><span class="n">rcParams</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -907,55 +930,55 @@ in order to create multile figures.</li>
 
     </div>
     <a class="headerlink" href="#PlotParameters.set_default_rcParams"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="PlotParameters.set_default_rcParams-211"><a href="#PlotParameters.set_default_rcParams-211"><span class="linenos">211</span></a>    <span class="nd">@classmethod</span>
-</span><span id="PlotParameters.set_default_rcParams-212"><a href="#PlotParameters.set_default_rcParams-212"><span class="linenos">212</span></a>    <span class="k">def</span> <span class="nf">set_default_rcParams</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">my_rcParams</span><span class="o">=</span><span class="p">{}):</span>
-</span><span id="PlotParameters.set_default_rcParams-213"><a href="#PlotParameters.set_default_rcParams-213"><span class="linenos">213</span></a>        <span class="sd">&#39;&#39;&#39;</span>
-</span><span id="PlotParameters.set_default_rcParams-214"><a href="#PlotParameters.set_default_rcParams-214"><span class="linenos">214</span></a><span class="sd">        A class method defining global plot parameters (plt.rcParams).</span>
-</span><span id="PlotParameters.set_default_rcParams-215"><a href="#PlotParameters.set_default_rcParams-215"><span class="linenos">215</span></a><span class="sd">        </span>
-</span><span id="PlotParameters.set_default_rcParams-216"><a href="#PlotParameters.set_default_rcParams-216"><span class="linenos">216</span></a><span class="sd">        Parameters</span>
-</span><span id="PlotParameters.set_default_rcParams-217"><a href="#PlotParameters.set_default_rcParams-217"><span class="linenos">217</span></a><span class="sd">        ----------</span>
-</span><span id="PlotParameters.set_default_rcParams-218"><a href="#PlotParameters.set_default_rcParams-218"><span class="linenos">218</span></a><span class="sd">        my_rcParams : dict</span>
-</span><span id="PlotParameters.set_default_rcParams-219"><a href="#PlotParameters.set_default_rcParams-219"><span class="linenos">219</span></a><span class="sd">            The dictionary re-defines selected plt.rcParams keys.</span>
-</span><span id="PlotParameters.set_default_rcParams-220"><a href="#PlotParameters.set_default_rcParams-220"><span class="linenos">220</span></a><span class="sd">            </span>
-</span><span id="PlotParameters.set_default_rcParams-221"><a href="#PlotParameters.set_default_rcParams-221"><span class="linenos">221</span></a><span class="sd">            Example:</span>
-</span><span id="PlotParameters.set_default_rcParams-222"><a href="#PlotParameters.set_default_rcParams-222"><span class="linenos">222</span></a><span class="sd">                </span>
-</span><span id="PlotParameters.set_default_rcParams-223"><a href="#PlotParameters.set_default_rcParams-223"><span class="linenos">223</span></a><span class="sd">            &gt;&gt;&gt; PlotParameters.set_default_rcParams({&#39;figure.dpi&#39;:500})</span>
-</span><span id="PlotParameters.set_default_rcParams-224"><a href="#PlotParameters.set_default_rcParams-224"><span class="linenos">224</span></a><span class="sd">            </span>
-</span><span id="PlotParameters.set_default_rcParams-225"><a href="#PlotParameters.set_default_rcParams-225"><span class="linenos">225</span></a><span class="sd">        Returns</span>
-</span><span id="PlotParameters.set_default_rcParams-226"><a href="#PlotParameters.set_default_rcParams-226"><span class="linenos">226</span></a><span class="sd">        -------</span>
-</span><span id="PlotParameters.set_default_rcParams-227"><a href="#PlotParameters.set_default_rcParams-227"><span class="linenos">227</span></a><span class="sd">        None</span>
-</span><span id="PlotParameters.set_default_rcParams-228"><a href="#PlotParameters.set_default_rcParams-228"><span class="linenos">228</span></a><span class="sd">            The function does not return anything,</span>
-</span><span id="PlotParameters.set_default_rcParams-229"><a href="#PlotParameters.set_default_rcParams-229"><span class="linenos">229</span></a><span class="sd">            BUT it re-defines the global variable rcParams.</span>
-</span><span id="PlotParameters.set_default_rcParams-230"><a href="#PlotParameters.set_default_rcParams-230"><span class="linenos">230</span></a>
-</span><span id="PlotParameters.set_default_rcParams-231"><a href="#PlotParameters.set_default_rcParams-231"><span class="linenos">231</span></a><span class="sd">        Notes</span>
-</span><span id="PlotParameters.set_default_rcParams-232"><a href="#PlotParameters.set_default_rcParams-232"><span class="linenos">232</span></a><span class="sd">        -----</span>
-</span><span id="PlotParameters.set_default_rcParams-233"><a href="#PlotParameters.set_default_rcParams-233"><span class="linenos">233</span></a><span class="sd">        * This is a @classmethod (because it is used within the whole class)</span>
-</span><span id="PlotParameters.set_default_rcParams-234"><a href="#PlotParameters.set_default_rcParams-234"><span class="linenos">234</span></a><span class="sd">          but it could be a @staticmethod as well (because it does not use</span>
-</span><span id="PlotParameters.set_default_rcParams-235"><a href="#PlotParameters.set_default_rcParams-235"><span class="linenos">235</span></a><span class="sd">          cls variable in fact).</span>
-</span><span id="PlotParameters.set_default_rcParams-236"><a href="#PlotParameters.set_default_rcParams-236"><span class="linenos">236</span></a><span class="sd">        * The method is employed in two ways:</span>
-</span><span id="PlotParameters.set_default_rcParams-237"><a href="#PlotParameters.set_default_rcParams-237"><span class="linenos">237</span></a><span class="sd">            - Standard usage of MCREEP package: default rcParams are used</span>
-</span><span id="PlotParameters.set_default_rcParams-238"><a href="#PlotParameters.set_default_rcParams-238"><span class="linenos">238</span></a><span class="sd">              (and possibly modified) in objects of PlotParameters class.</span>
-</span><span id="PlotParameters.set_default_rcParams-239"><a href="#PlotParameters.set_default_rcParams-239"><span class="linenos">239</span></a><span class="sd">            - Special usage of MCREEP (more figures, multiplots): default</span>
-</span><span id="PlotParameters.set_default_rcParams-240"><a href="#PlotParameters.set_default_rcParams-240"><span class="linenos">240</span></a><span class="sd">              rcParams are used when definining the axes of (multiple) figures.</span>
-</span><span id="PlotParameters.set_default_rcParams-241"><a href="#PlotParameters.set_default_rcParams-241"><span class="linenos">241</span></a><span class="sd">        &#39;&#39;&#39;</span>
-</span><span id="PlotParameters.set_default_rcParams-242"><a href="#PlotParameters.set_default_rcParams-242"><span class="linenos">242</span></a>        
-</span><span id="PlotParameters.set_default_rcParams-243"><a href="#PlotParameters.set_default_rcParams-243"><span class="linenos">243</span></a>        <span class="c1"># (1) Set default rcParams</span>
-</span><span id="PlotParameters.set_default_rcParams-244"><a href="#PlotParameters.set_default_rcParams-244"><span class="linenos">244</span></a>        <span class="c1"># (Hardcoded, suitable default for standard plots</span>
-</span><span id="PlotParameters.set_default_rcParams-245"><a href="#PlotParameters.set_default_rcParams-245"><span class="linenos">245</span></a>        <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
-</span><span id="PlotParameters.set_default_rcParams-246"><a href="#PlotParameters.set_default_rcParams-246"><span class="linenos">246</span></a>            <span class="s1">&#39;figure.figsize&#39;</span>     <span class="p">:</span> <span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="mf">2.54</span><span class="p">,</span><span class="mi">6</span><span class="o">/</span><span class="mf">2.54</span><span class="p">),</span>
-</span><span id="PlotParameters.set_default_rcParams-247"><a href="#PlotParameters.set_default_rcParams-247"><span class="linenos">247</span></a>            <span class="s1">&#39;figure.dpi&#39;</span>         <span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
-</span><span id="PlotParameters.set_default_rcParams-248"><a href="#PlotParameters.set_default_rcParams-248"><span class="linenos">248</span></a>            <span class="s1">&#39;font.size&#39;</span>          <span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-</span><span id="PlotParameters.set_default_rcParams-249"><a href="#PlotParameters.set_default_rcParams-249"><span class="linenos">249</span></a>            <span class="s1">&#39;lines.linewidth&#39;</span>    <span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
-</span><span id="PlotParameters.set_default_rcParams-250"><a href="#PlotParameters.set_default_rcParams-250"><span class="linenos">250</span></a>            <span class="s1">&#39;axes.linewidth&#39;</span>     <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
-</span><span id="PlotParameters.set_default_rcParams-251"><a href="#PlotParameters.set_default_rcParams-251"><span class="linenos">251</span></a>            <span class="s1">&#39;xtick.major.width&#39;</span>  <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
-</span><span id="PlotParameters.set_default_rcParams-252"><a href="#PlotParameters.set_default_rcParams-252"><span class="linenos">252</span></a>            <span class="s1">&#39;ytick.major.width&#39;</span>  <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
-</span><span id="PlotParameters.set_default_rcParams-253"><a href="#PlotParameters.set_default_rcParams-253"><span class="linenos">253</span></a>            <span class="s1">&#39;grid.linewidth&#39;</span>     <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
-</span><span id="PlotParameters.set_default_rcParams-254"><a href="#PlotParameters.set_default_rcParams-254"><span class="linenos">254</span></a>            <span class="s1">&#39;grid.linestyle&#39;</span>     <span class="p">:</span> <span class="s1">&#39;:&#39;</span><span class="p">})</span>
-</span><span id="PlotParameters.set_default_rcParams-255"><a href="#PlotParameters.set_default_rcParams-255"><span class="linenos">255</span></a>        
-</span><span id="PlotParameters.set_default_rcParams-256"><a href="#PlotParameters.set_default_rcParams-256"><span class="linenos">256</span></a>        <span class="c1"># (2) Update default with argument rcParams, if it was given</span>
-</span><span id="PlotParameters.set_default_rcParams-257"><a href="#PlotParameters.set_default_rcParams-257"><span class="linenos">257</span></a>        <span class="c1"># (User-defined in the main program, if necessary</span>
-</span><span id="PlotParameters.set_default_rcParams-258"><a href="#PlotParameters.set_default_rcParams-258"><span class="linenos">258</span></a>        <span class="c1"># (Useful namely for multiplots</span>
-</span><span id="PlotParameters.set_default_rcParams-259"><a href="#PlotParameters.set_default_rcParams-259"><span class="linenos">259</span></a>        <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">my_rcParams</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="PlotParameters.set_default_rcParams-219"><a href="#PlotParameters.set_default_rcParams-219"><span class="linenos">219</span></a>    <span class="nd">@classmethod</span>
+</span><span id="PlotParameters.set_default_rcParams-220"><a href="#PlotParameters.set_default_rcParams-220"><span class="linenos">220</span></a>    <span class="k">def</span> <span class="nf">set_default_rcParams</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">my_rcParams</span><span class="o">=</span><span class="p">{}):</span>
+</span><span id="PlotParameters.set_default_rcParams-221"><a href="#PlotParameters.set_default_rcParams-221"><span class="linenos">221</span></a>        <span class="sd">&#39;&#39;&#39;</span>
+</span><span id="PlotParameters.set_default_rcParams-222"><a href="#PlotParameters.set_default_rcParams-222"><span class="linenos">222</span></a><span class="sd">        A class method defining global plot parameters (plt.rcParams).</span>
+</span><span id="PlotParameters.set_default_rcParams-223"><a href="#PlotParameters.set_default_rcParams-223"><span class="linenos">223</span></a><span class="sd">        </span>
+</span><span id="PlotParameters.set_default_rcParams-224"><a href="#PlotParameters.set_default_rcParams-224"><span class="linenos">224</span></a><span class="sd">        Parameters</span>
+</span><span id="PlotParameters.set_default_rcParams-225"><a href="#PlotParameters.set_default_rcParams-225"><span class="linenos">225</span></a><span class="sd">        ----------</span>
+</span><span id="PlotParameters.set_default_rcParams-226"><a href="#PlotParameters.set_default_rcParams-226"><span class="linenos">226</span></a><span class="sd">        my_rcParams : dict</span>
+</span><span id="PlotParameters.set_default_rcParams-227"><a href="#PlotParameters.set_default_rcParams-227"><span class="linenos">227</span></a><span class="sd">            The dictionary re-defines selected plt.rcParams keys.</span>
+</span><span id="PlotParameters.set_default_rcParams-228"><a href="#PlotParameters.set_default_rcParams-228"><span class="linenos">228</span></a><span class="sd">            </span>
+</span><span id="PlotParameters.set_default_rcParams-229"><a href="#PlotParameters.set_default_rcParams-229"><span class="linenos">229</span></a><span class="sd">            Example:</span>
+</span><span id="PlotParameters.set_default_rcParams-230"><a href="#PlotParameters.set_default_rcParams-230"><span class="linenos">230</span></a><span class="sd">                </span>
+</span><span id="PlotParameters.set_default_rcParams-231"><a href="#PlotParameters.set_default_rcParams-231"><span class="linenos">231</span></a><span class="sd">            &gt;&gt;&gt; PlotParameters.set_default_rcParams({&#39;figure.dpi&#39;:500})</span>
+</span><span id="PlotParameters.set_default_rcParams-232"><a href="#PlotParameters.set_default_rcParams-232"><span class="linenos">232</span></a><span class="sd">            </span>
+</span><span id="PlotParameters.set_default_rcParams-233"><a href="#PlotParameters.set_default_rcParams-233"><span class="linenos">233</span></a><span class="sd">        Returns</span>
+</span><span id="PlotParameters.set_default_rcParams-234"><a href="#PlotParameters.set_default_rcParams-234"><span class="linenos">234</span></a><span class="sd">        -------</span>
+</span><span id="PlotParameters.set_default_rcParams-235"><a href="#PlotParameters.set_default_rcParams-235"><span class="linenos">235</span></a><span class="sd">        None</span>
+</span><span id="PlotParameters.set_default_rcParams-236"><a href="#PlotParameters.set_default_rcParams-236"><span class="linenos">236</span></a><span class="sd">            The function does not return anything,</span>
+</span><span id="PlotParameters.set_default_rcParams-237"><a href="#PlotParameters.set_default_rcParams-237"><span class="linenos">237</span></a><span class="sd">            BUT it re-defines the global variable rcParams.</span>
+</span><span id="PlotParameters.set_default_rcParams-238"><a href="#PlotParameters.set_default_rcParams-238"><span class="linenos">238</span></a>
+</span><span id="PlotParameters.set_default_rcParams-239"><a href="#PlotParameters.set_default_rcParams-239"><span class="linenos">239</span></a><span class="sd">        Notes</span>
+</span><span id="PlotParameters.set_default_rcParams-240"><a href="#PlotParameters.set_default_rcParams-240"><span class="linenos">240</span></a><span class="sd">        -----</span>
+</span><span id="PlotParameters.set_default_rcParams-241"><a href="#PlotParameters.set_default_rcParams-241"><span class="linenos">241</span></a><span class="sd">        * This is a @classmethod (because it is used within the whole class)</span>
+</span><span id="PlotParameters.set_default_rcParams-242"><a href="#PlotParameters.set_default_rcParams-242"><span class="linenos">242</span></a><span class="sd">          but it could be a @staticmethod as well (because it does not use</span>
+</span><span id="PlotParameters.set_default_rcParams-243"><a href="#PlotParameters.set_default_rcParams-243"><span class="linenos">243</span></a><span class="sd">          cls variable in fact).</span>
+</span><span id="PlotParameters.set_default_rcParams-244"><a href="#PlotParameters.set_default_rcParams-244"><span class="linenos">244</span></a><span class="sd">        * The method is employed in two ways:</span>
+</span><span id="PlotParameters.set_default_rcParams-245"><a href="#PlotParameters.set_default_rcParams-245"><span class="linenos">245</span></a><span class="sd">            - Standard usage of MCREEP package: default rcParams are used</span>
+</span><span id="PlotParameters.set_default_rcParams-246"><a href="#PlotParameters.set_default_rcParams-246"><span class="linenos">246</span></a><span class="sd">              (and possibly modified) in objects of PlotParameters class.</span>
+</span><span id="PlotParameters.set_default_rcParams-247"><a href="#PlotParameters.set_default_rcParams-247"><span class="linenos">247</span></a><span class="sd">            - Special usage of MCREEP (more figures, multiplots): default</span>
+</span><span id="PlotParameters.set_default_rcParams-248"><a href="#PlotParameters.set_default_rcParams-248"><span class="linenos">248</span></a><span class="sd">              rcParams are used when definining the axes of (multiple) figures.</span>
+</span><span id="PlotParameters.set_default_rcParams-249"><a href="#PlotParameters.set_default_rcParams-249"><span class="linenos">249</span></a><span class="sd">        &#39;&#39;&#39;</span>
+</span><span id="PlotParameters.set_default_rcParams-250"><a href="#PlotParameters.set_default_rcParams-250"><span class="linenos">250</span></a>        
+</span><span id="PlotParameters.set_default_rcParams-251"><a href="#PlotParameters.set_default_rcParams-251"><span class="linenos">251</span></a>        <span class="c1"># (1) Set default rcParams</span>
+</span><span id="PlotParameters.set_default_rcParams-252"><a href="#PlotParameters.set_default_rcParams-252"><span class="linenos">252</span></a>        <span class="c1"># (Hardcoded, suitable default for standard plots</span>
+</span><span id="PlotParameters.set_default_rcParams-253"><a href="#PlotParameters.set_default_rcParams-253"><span class="linenos">253</span></a>        <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+</span><span id="PlotParameters.set_default_rcParams-254"><a href="#PlotParameters.set_default_rcParams-254"><span class="linenos">254</span></a>            <span class="s1">&#39;figure.figsize&#39;</span>     <span class="p">:</span> <span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="mf">2.54</span><span class="p">,</span><span class="mi">6</span><span class="o">/</span><span class="mf">2.54</span><span class="p">),</span>
+</span><span id="PlotParameters.set_default_rcParams-255"><a href="#PlotParameters.set_default_rcParams-255"><span class="linenos">255</span></a>            <span class="s1">&#39;figure.dpi&#39;</span>         <span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+</span><span id="PlotParameters.set_default_rcParams-256"><a href="#PlotParameters.set_default_rcParams-256"><span class="linenos">256</span></a>            <span class="s1">&#39;font.size&#39;</span>          <span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+</span><span id="PlotParameters.set_default_rcParams-257"><a href="#PlotParameters.set_default_rcParams-257"><span class="linenos">257</span></a>            <span class="s1">&#39;lines.linewidth&#39;</span>    <span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+</span><span id="PlotParameters.set_default_rcParams-258"><a href="#PlotParameters.set_default_rcParams-258"><span class="linenos">258</span></a>            <span class="s1">&#39;axes.linewidth&#39;</span>     <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+</span><span id="PlotParameters.set_default_rcParams-259"><a href="#PlotParameters.set_default_rcParams-259"><span class="linenos">259</span></a>            <span class="s1">&#39;xtick.major.width&#39;</span>  <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+</span><span id="PlotParameters.set_default_rcParams-260"><a href="#PlotParameters.set_default_rcParams-260"><span class="linenos">260</span></a>            <span class="s1">&#39;ytick.major.width&#39;</span>  <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+</span><span id="PlotParameters.set_default_rcParams-261"><a href="#PlotParameters.set_default_rcParams-261"><span class="linenos">261</span></a>            <span class="s1">&#39;grid.linewidth&#39;</span>     <span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+</span><span id="PlotParameters.set_default_rcParams-262"><a href="#PlotParameters.set_default_rcParams-262"><span class="linenos">262</span></a>            <span class="s1">&#39;grid.linestyle&#39;</span>     <span class="p">:</span> <span class="s1">&#39;:&#39;</span><span class="p">})</span>
+</span><span id="PlotParameters.set_default_rcParams-263"><a href="#PlotParameters.set_default_rcParams-263"><span class="linenos">263</span></a>        
+</span><span id="PlotParameters.set_default_rcParams-264"><a href="#PlotParameters.set_default_rcParams-264"><span class="linenos">264</span></a>        <span class="c1"># (2) Update default with argument rcParams, if it was given</span>
+</span><span id="PlotParameters.set_default_rcParams-265"><a href="#PlotParameters.set_default_rcParams-265"><span class="linenos">265</span></a>        <span class="c1"># (User-defined in the main program, if necessary</span>
+</span><span id="PlotParameters.set_default_rcParams-266"><a href="#PlotParameters.set_default_rcParams-266"><span class="linenos">266</span></a>        <span class="c1"># (Useful namely for multiplots</span>
+</span><span id="PlotParameters.set_default_rcParams-267"><a href="#PlotParameters.set_default_rcParams-267"><span class="linenos">267</span></a>        <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">my_rcParams</span><span class="p">)</span>
 </span></pre></div>
 
 

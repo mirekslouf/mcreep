@@ -186,11 +186,18 @@ class PlotParameters:
         * If ax is defined, create the plot within given ax object,
           which can combined with `fig,ax = plt.subplots()`
           in order to create multile figures.
+          
+    legend_coordinates : None or tuple of two floats, optional, default is None
+        If not given (typical case)
+        some suitable default position of legend argument will be set.
+        If the argument is given,
+        the legend is placed at given position within the graph;
+        *legend_coordinates* = upper left corner, in fractional coordinates.
     '''
     
     def __init__(self, xlabel, ylabel,
-                 logscale=False, e_to_percent=True,
-                 rcParams={}, showfigs=True, ax=None):
+                 logscale=False, e_to_percent=True, rcParams={},
+                 showfigs=True, ax=None, legend_coordinates=None):
         # Docstring for __init__ is given above in the class definition.
         # Reason: consistent help in Spyder and Pdoc.
         # -----        
@@ -203,6 +210,7 @@ class PlotParameters:
         self.rcParams = rcParams
         self.showfigs = showfigs
         self.ax = ax
+        self.legend_coordinates = legend_coordinates
         
         # (2) Set global plot settings using rcParams
         PlotParameters.set_default_rcParams(rcParams)
