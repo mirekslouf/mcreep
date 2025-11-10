@@ -84,11 +84,11 @@ def evp_s_d_1kv(t, const,B0,Cv, D1, tau1):
 
     const : float
         Multiplicative constant for EVP models.
-        * Tensile experiments: const = applied stress = sigma[GPa]
-            - `sigma` = constant, calculated+saved in mcreep.const.Experiment
-        * Indentation experiments: const = `F*K`
-            - `F[mN]` = loading force
-            - `K` = constant, calculated+saved in mcreep.const.Experiment
+        For tensile experiments: `const = applied stress = sigma[GPa]`;
+        `sigma` is auto-calculated in mcreep.const.Experiment.
+        For indentation experiments: `const = F*K`;
+        `F[mN]` = loading force and
+        `K` = constant, auto-calculated in mcreep.const.Experiment.
 
     B0 : float
         Parameter corresponding to S-element of EVP model.
@@ -124,11 +124,11 @@ def evp_s_d_2kv(t, const,B0,Cv, D1,D2, tau1,tau2):
 
     const : float
         Multiplicative constant for EVP models.
-        * Tensile experiments: const = applied stress = sigma[GPa]
-            - `sigma` = constant, calculated+saved in mcreep.const.Experiment
-        * Indentation experiments: const = `F*K`
-            - `F[mN]` = loading force
-            - `K` = constant, calculated+saved in mcreep.const.Experiment
+        For tensile experiments: `const = applied stress = sigma[GPa]`;
+        `sigma` is auto-calculated in mcreep.const.Experiment.
+        For indentation experiments: `const = F*K`;
+        `F[mN]` = loading force and
+        `K` = constant, auto-calculated in mcreep.const.Experiment.
 
     B0 : float
         Parameter corresponding to S-element of EVP model.
@@ -165,11 +165,11 @@ def evp_s_d_3kv(t, const,B0,Cv, D1,D2,D3, tau1,tau2,tau3):
 
     const : float
         Multiplicative constant for EVP models.
-        * Tensile experiments: const = applied stress = sigma[GPa]
-            - `sigma` = constant, calculated+saved in mcreep.const.Experiment
-        * Indentation experiments: const = `F*K`
-            - `F[mN]` = loading force
-            - `K` = constant, calculated+saved in mcreep.const.Experiment
+        For tensile experiments: `const = applied stress = sigma[GPa]`;
+        `sigma` is auto-calculated in mcreep.const.Experiment.
+        For indentation experiments: `const = F*K`;
+        `F[mN]` = loading force and
+        `K` = constant, auto-calculated in mcreep.const.Experiment.
 
     B0 : float
         Parameter corresponding to S-element of EVP model.

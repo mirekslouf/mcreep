@@ -7,6 +7,7 @@ Input/output functions for package mcreep.
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 from pathlib import Path
 
 def read_datafile(MODEL, datafile, t_start, t_hold):
@@ -74,6 +75,38 @@ def read_datafile(MODEL, datafile, t_start, t_hold):
     # Return final 2D numpy array
     # (1st column = t[s], 2nd col = def[um], range = [t_start;t_start+t_hold]
     return(data)
+    
+def read_list_of_datafiles(filename):
+    '''
+    Read a text file containing the list of datafiles with loading times.
+
+    Parameters
+    ----------
+    filename : str
+        Name of the text file, which contains header and two columns.
+        The header = the 1s of the file = column names: Datafile t_start
+        The 1st column = datafile names (relative paths to current dir).
+        The 2nd column = real loading times for the individual datafiles.
+
+    Returns
+    -------
+    datafiles : list of strings
+        List of datafiles names (relative paths).
+    loading_times : list of floats
+        List of real loading times for each datafile.
+    '''
+    # Read filename = text file with dafile names and loading times
+    # (Format of the file is specified above in function docstring
+    # (It is a simple text file, which can be prepared manually
+    # (Typically, the text file is made with an auxiliary script and edited
+    # (See examples on www for more information
+    df = pd.read_csv(filename, sep='\s+')
+    # If the file exists and has the required format,
+    # we simply convert the two columns to lists and return them
+    datafiles = list(df.Datafile)
+    loading_times = list(df.t_start)
+    # Return the list of datafiles and loading times
+    return(datafiles, loading_times)
 
 def print_fitting_result(MODEL, datafile, par, cov):
     '''
@@ -224,10 +257,14 @@ def plot_fitting_result(MODEL, datafile, data, par):
             MODEL.PPAR.xlabel = 'log('+MODEL.PPAR.xlabel+')'
         if not(MODEL.PPAR.ylabel.startswith('log')):
             MODEL.PPAR.ylabel = 'log('+MODEL.PPAR.ylabel+')'
-    # (6) Define suitable default for legend coordinates
-    # (in a typical case when the legend coordinates were NOT given as argument
-    if MODEL.PPAR.legend_coordinates == None:
-        my_legend_coordinates = (0.52,0.28)
+    # (6) Define legend coordinates
+    # (The coordinates were given as argument OR we set some suitable default. 
+    if MODEL.PPAR.legend_coordinates != None:
+        # coordinates specified during plot initialization => use them
+        my_legend_coordinates = MODEL.PPAR.legend_coordinates
+    else:
+        # coordinates were not specified (typical case) => set default
+        my_legend_coordinates = (0.52,0.28)   
     # (7) Create plot
     # (user-adjustable + global plot settings are saved in PPAR object
     # (MODEL.PPAR object is an instance of mcreep.const.PlotParameters class
@@ -267,7 +304,8 @@ def plot_fitting_result(MODEL, datafile, data, par):
         ax.set_xlabel(MODEL.PPAR.xlabel)
         ax.set_ylabel(MODEL.PPAR.ylabel)
         ax.grid()
-        ax.legend(loc='upper left', bbox_to_anchor=my_legend_coordinates)
+        leg = ax.legend(loc='upper left', bbox_to_anchor=my_legend_coordinates)
+        leg.set_in_layout(False)
         
 def recalculate_fitted_data(EPAR, Y_orig):
     '''

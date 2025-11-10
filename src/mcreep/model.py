@@ -651,7 +651,8 @@ class Model:
         ----------
         output_file : str, optional
             Name of the output text file, into which the results are saved.
-            If the parameter is given
+            Default output filename {calling_script_name}.txt is used
+            if this argument is not given.
 
         Returns
         -------
